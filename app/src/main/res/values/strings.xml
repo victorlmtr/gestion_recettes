@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">gestion recettes</string>
+    <string name="bottom_navigation_home">Accueil</string>
+    <string name="bottom_navigation_profile">Profil</string>
+    <string name="bottom_navigation_recipes">Recettes</string>
+    <string name="bottom_navigation_inventory">Courses</string>
+    <string name="placeholder_search">Rechercher…</string>
+    <string name="title_activity_home">Home</string>
+</resources>
