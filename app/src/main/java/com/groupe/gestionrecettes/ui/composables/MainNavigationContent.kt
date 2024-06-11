@@ -21,17 +21,21 @@ import com.groupe.gestionrecettes.data.Screens
 import com.groupe.gestionrecettes.ui.screens.HomeScreen
 import com.groupe.gestionrecettes.ui.screens.PantryScreen
 import com.groupe.gestionrecettes.ui.screens.ProfileScreen
+import com.groupe.gestionrecettes.ui.screens.RecipeDetailsScreen
 import com.groupe.gestionrecettes.ui.screens.RecipesScreen
 
 @Composable
 fun MainNavigationContent(navController: NavHostController = rememberNavController()) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
+    val routesWithoutBottomBar = listOf(Screens.RecipeDetails.route)
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
-            BottomNavigationBar(navController = navController, currentDestination = currentDestination?.route)
+            if (currentDestination?.route !in routesWithoutBottomBar) {
+                BottomNavigationBar(navController = navController, currentRoute = currentDestination?.route)
+            }
         }
     ) { paddingValues ->
         NavHost(
@@ -43,6 +47,9 @@ fun MainNavigationContent(navController: NavHostController = rememberNavControll
             composable(Screens.Recipes.route) { RecipesScreen(navController) }
             composable(Screens.Pantry.route) { PantryScreen(navController) }
             composable(Screens.Profile.route) { ProfileScreen(navController) }
+            composable(Screens.RecipeDetails.route) { backStackEntry ->
+                RecipeDetailsScreen(recipeId = backStackEntry.arguments?.getString("recipeId") ?: "")
+            }
         }
     }
 }

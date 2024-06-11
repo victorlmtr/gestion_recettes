@@ -28,11 +28,11 @@ import com.groupe.gestionrecettes.ui.screens.ProfileScreen
 import com.groupe.gestionrecettes.ui.screens.RecipesScreen
 
 @Composable
-fun BottomNavigationBar(navController: NavHostController, currentDestination: String?) {
+fun BottomNavigationBar(navController: NavHostController, currentRoute: String?) {
     NavigationBar {
         BottomNavigationItem().bottomNavigationItems().forEachIndexed { _, navigationItem ->
             NavigationBarItem(
-                selected = navigationItem.route == currentDestination,
+                selected = navigationItem.route == currentRoute,
                 label = { Text(navigationItem.label) },
                 icon = { Icon(navigationItem.icon, contentDescription = navigationItem.label) },
                 onClick = {
