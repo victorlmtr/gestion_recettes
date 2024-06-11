@@ -17,8 +17,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.groupe.gestionrecettes.ui.composables.BottomNavigationBar
+import com.groupe.gestionrecettes.ui.composables.MainNavigationContent
 import com.groupe.gestionrecettes.ui.composables.SearchBar
 
 class MainActivity : ComponentActivity() {
@@ -31,33 +35,21 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    BottomNavigationBar()
+                    MainNavigationContent()
                 }
             }
         }
     }
 }
-@Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
-    Column(
-        modifier
-            .verticalScroll(rememberScrollState())
-    ) {
-        Spacer(Modifier.height(16.dp))
-        SearchBar(Modifier.padding(horizontal = 16.dp))
-        Spacer(Modifier.height(16.dp))
-    }
-}
 
 @Composable
-fun GestionRecettesAppPortrait() {
+fun GestionRecettesApp() {
     GestionRecettesTheme {
-         BottomNavigationBar()
     }
 }
 
 @Preview(widthDp = 360, heightDp = 640)
 @Composable
-fun GestionRecettesPortraitPreview() {
-    GestionRecettesAppPortrait()
+fun GestionRecettesPreview() {
+    GestionRecettesApp()
 }

@@ -6,7 +6,6 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Kitchen
 import androidx.compose.material.icons.filled.RestaurantMenu
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.groupe.gestionrecettes.ui.BottomBarScreen
 
 data class BottomNavigationItem(
     val label : String = "",
@@ -32,7 +31,7 @@ data class BottomNavigationItem(
                 route = Screens.Pantry.route
             ),
             BottomNavigationItem(
-                label = "Profile",
+                label = "Profil",
                 icon = Icons.Default.AccountCircle,
                 route = Screens.Profile.route
             ),
