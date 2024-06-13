@@ -1,9 +1,7 @@
 package com.groupe.gestionrecettes.ui.composables
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -14,39 +12,41 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-
-@Preview(showBackground = true)
-@Composable
-fun UsernameTextFieldPreview() {
-    val userName = remember { mutableStateOf("") }
-    UserNameTextField(userName = userName)
-}
+import com.groupe.gestionrecettes.R
 
 @Composable
-fun UserNameTextField(userName: MutableState<String>) {
+fun PasswordTextField(password: MutableState<String>) {
     OutlinedTextField(
         modifier = Modifier.padding(20.dp),
-        value = userName.value,
+        value = password.value,
         onValueChange = { newText ->
-            userName.value = newText
+            password.value = newText
         },
         placeholder = {
-            Text(text = "Entrer votre nom d'utilisateur...")
+            Text(text = "Mot de passe...")
         },
         label = {
-            Text(text = "Nom d'utilisateur : ")
-        },
+            Text(text = "Mot de passe : ")
+        }, visualTransformation = PasswordVisualTransformation(),
         leadingIcon = {
-            Icon(imageVector = Icons.Default.Person, contentDescription = null)
-        },
-        trailingIcon = {
-            Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null)
+            Icon(painter = painterResource(R.drawable.iconpassword),
+                contentDescription = null,
+                modifier = Modifier.size(28.dp))
         },
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = Color.Black,
             unfocusedBorderColor = Color.Green,
         )
     )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PasswordTextFieldPreview() {
+    val userName = remember { mutableStateOf("") }
+    UserNameTextField(userName = userName)
 }
