@@ -30,6 +30,12 @@ import com.groupe.gestionrecettes.ui.composables.PasswordTextField
 import com.groupe.gestionrecettes.ui.composables.UserNameTextField
 import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
 
+@Preview(showBackground = true)
+@Composable
+fun LoginScreenPreview() {
+    LoginScreen()
+}
+
 @Composable
 fun LoginScreen() {
     val userName = remember { mutableStateOf("") }
@@ -84,9 +90,5 @@ fun LoginScreen() {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun LoginScreenPreview() {
-    LoginScreen()
-}
+
 
