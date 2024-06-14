@@ -60,8 +60,8 @@ fun LoginScreen() {
                 )
                 Text(text = "Connectez vous à votre compte")
 
-                UserNameTextField()
-                PasswordTextField()
+                UserNameTextField(userName = userName)
+                PasswordTextField(password = password)
                 CtaButton(label = "Connexion") {
                 }
                 Text(

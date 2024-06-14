@@ -18,6 +18,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.groupe.gestionrecettes.R
 
+@Preview(showBackground = true)
+@Composable
+fun PasswordTextFieldPreview() {
+    val password = remember { mutableStateOf("") }
+    PasswordTextField(
+        password = password
+    )
+}
+
+
 @Composable
 fun PasswordTextField(password: MutableState<String>) {
     OutlinedTextField(
@@ -44,9 +54,3 @@ fun PasswordTextField(password: MutableState<String>) {
     )
 }
 
-@Preview(showBackground = true)
-@Composable
-fun PasswordTextFieldPreview() {
-    val userName = remember { mutableStateOf("") }
-    UserNameTextField(userName = userName)
-}

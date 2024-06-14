@@ -21,7 +21,9 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun UsernameTextFieldPreview() {
     val userName = remember { mutableStateOf("") }
-    UserNameTextField(userName = userName)
+    UserNameTextField(
+        userName = userName
+    )
 }
 
 @Composable
