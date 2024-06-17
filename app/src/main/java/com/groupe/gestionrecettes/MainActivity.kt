@@ -11,12 +11,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -42,14 +45,3 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun GestionRecettesApp() {
-    GestionRecettesTheme {
-    }
-}
-
-@Preview(widthDp = 360, heightDp = 640)
-@Composable
-fun GestionRecettesPreview() {
-    GestionRecettesApp()
-}

@@ -274,33 +274,20 @@ val unspecified_scheme = ColorFamily(
 
 @Composable
 fun GestionRecettesTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    useDarkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable() () -> Unit
 ) {
-  val colorScheme = when {
-      dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-          val context = LocalContext.current
-          if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-      }
-      
-      darkTheme -> darkScheme
-      else -> lightScheme
-  }
-  val view = LocalView.current
-  if (!view.isInEditMode) {
-    SideEffect {
-      val window = (view.context as Activity).window
-      window.statusBarColor = colorScheme.primary.toArgb()
-      WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+    val colors = if (!useDarkTheme) {
+        lightScheme
+    } else {
+        darkScheme
     }
-  }
 
-  MaterialTheme(
-    colorScheme = colorScheme,
-    typography = AppTypography,
-    content = content
-  )
+    MaterialTheme(
+        colorScheme = colors,
+        content = content
+    )
 }
+
+
 
