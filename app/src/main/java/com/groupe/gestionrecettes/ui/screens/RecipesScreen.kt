@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.groupe.gestionrecettes.R
 import com.groupe.gestionrecettes.data.Screens
+import com.groupe.gestionrecettes.ui.composables.RecipeSmallCard
 import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
 
 @Composable
@@ -41,6 +42,7 @@ fun RecipesScreen(navController: NavController) {
         }) {
             Text("Go to Recipe Details")
         }
+        RecipeSmallCard(recipeName = "Carbonade flamande", imageRes = R.drawable.carbonade2)
     }
 }
 
