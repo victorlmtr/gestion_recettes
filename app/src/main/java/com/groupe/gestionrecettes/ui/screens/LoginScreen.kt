@@ -58,7 +58,7 @@ fun LoginScreen() {
                 Text(
                     text = "Bienvenue !",
                     style = MaterialTheme.typography.titleLarge.copy(
-                        color = Color.Green
+                        color = MaterialTheme.colorScheme.primary
                     ),
                     modifier = Modifier.padding(vertical = 20.dp),
                     fontSize = 28.sp,
