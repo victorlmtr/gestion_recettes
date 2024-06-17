@@ -37,10 +37,10 @@ fun PasswordTextField(password: MutableState<String>) {
             password.value = newText
         },
         placeholder = {
-            Text(text = "Mot de passe...")
+            Text(text = "Mot de passe…")
         },
         label = {
-            Text(text = "Mot de passe : ")
+            Text(text = "Mot de passe ")
         }, visualTransformation = PasswordVisualTransformation(),
         leadingIcon = {
             Icon(painter = painterResource(R.drawable.iconpassword),

@@ -48,10 +48,12 @@ fun RecipeSmallCard(
                 modifier = Modifier.weight(1f)
             )
             var isVegetableChipSelected by remember { mutableStateOf(false) }
-            FilterChipIcon(label = "Légumes",
-                iconRes = R.drawable.vegetables,
+            FilterChipIcon(label = "Bœuf",
+                iconRes = R.drawable.beef,
                 selected = isVegetableChipSelected,
                 onSelectedChange = { isVegetableChipSelected = it })
+            var isBelgiumChipSelected by remember { mutableStateOf(false) }
+            FilterChip("Belgique", selected = isBelgiumChipSelected, onSelectedChange = { isBelgiumChipSelected = it})
             Image(
                 painter = painterResource(id = imageRes),
                 contentDescription = null,
