@@ -19,8 +19,9 @@ import com.groupe.gestionrecettes.R
 import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
 
 @Composable
-fun FilterChip(
+fun FilterChipIcon(
     label: String,
+    @DrawableRes iconRes: Int,
     selected: Boolean,
     onSelectedChange: (Boolean) -> Unit
 ) {
@@ -28,17 +29,35 @@ fun FilterChip(
         selected = selected,
         onClick = { onSelectedChange(!selected) },
         label = { Text(label) },
+        leadingIcon = if (selected) {
+            {
+                Icon(
+                    imageVector = Icons.Filled.Check,
+                    contentDescription = "Selected",
+                    modifier = Modifier.size(FilterChipDefaults.IconSize)
+                )
+            }
+        } else {
+            {
+                Icon(
+                    painter = painterResource(id = iconRes),
+                    contentDescription = label,
+                    modifier = Modifier.size(FilterChipDefaults.IconSize)
+                )
+            }
+        }
     )
 }
 
 @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
 @Composable
-fun FilterChipPreview() {
+fun FilterChipIconPreview() {
     GestionRecettesTheme {
-        var isIndiaChipSelected by remember { mutableStateOf(false) }
-        FilterChip(
-            label = "Inde",
-            selected = isIndiaChipSelected,
-            onSelectedChange = { isIndiaChipSelected = it }
+        var isVegetableChipSelected by remember { mutableStateOf(false) }
+        FilterChipIcon(
+            label = "Légumes",
+            iconRes = R.drawable.vegetables,
+            selected = isVegetableChipSelected,
+            onSelectedChange = { isVegetableChipSelected = it }
         ) }
 }
