@@ -8,20 +8,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
+import com.groupe.gestionrecettes.data.Screens
 import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
+
 
 @Composable
 fun ProfileScreen(navController: NavController) {
-    ProfileScreenContent()
-}
-
-@Composable
-fun ProfileScreenContent() {
     GestionRecettesTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -39,6 +40,12 @@ fun ProfileScreenContent() {
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.padding(vertical = 20.dp)
                 )
+                Spacer(modifier = Modifier.height(20.dp))
+                Button(onClick = {
+                    navController.navigate(Screens.Login.route)
+                }) {
+                    Text("Go to Lognn")
+                }
             }
         }
     }
@@ -47,5 +54,6 @@ fun ProfileScreenContent() {
 @Preview(showBackground = true)
 @Composable
 fun ProfileScreenPreview() {
-    ProfileScreenContent()
+    val navController = rememberNavController()
+    ProfileScreen(navController)
 }
