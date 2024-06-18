@@ -5,6 +5,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -16,14 +17,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
 
 @Preview(showBackground = true)
 @Composable
 fun UsernameTextFieldPreview() {
-    val userName = remember { mutableStateOf("") }
-    UserNameTextField(
-        userName = userName
-    )
+    GestionRecettesTheme {
+        val userName = remember { mutableStateOf("") }
+        UserNameTextField(userName = userName)
+    }
 }
 
 @Composable
@@ -35,10 +37,10 @@ fun UserNameTextField(userName: MutableState<String>) {
             userName.value = newText
         },
         placeholder = {
-            Text(text = "Entrer votre nom d'utilisateur...")
+            Text(text = "Nom d'utilisateur")
         },
         label = {
-            Text(text = "Nom d'utilisateur : ")
+            Text(text = "Nom d'utilisateur ")
         },
         leadingIcon = {
             Icon(imageVector = Icons.Default.Person, contentDescription = null)
@@ -48,7 +50,7 @@ fun UserNameTextField(userName: MutableState<String>) {
         },
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = Color.Black,
-            unfocusedBorderColor = Color.Green,
+            unfocusedBorderColor = MaterialTheme.colorScheme.primary,
         )
     )
 }

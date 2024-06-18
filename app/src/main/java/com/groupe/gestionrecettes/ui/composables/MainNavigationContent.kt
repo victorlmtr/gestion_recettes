@@ -48,7 +48,7 @@ fun MainNavigationContent(navController: NavHostController = rememberNavControll
             composable(Screens.Recipes.route) { RecipesScreen(navController) }
             composable(Screens.Pantry.route) { PantryScreen(navController) }
             composable(Screens.Profile.route) { ProfileScreen(navController) }
-            composable(Screens.Login.route) { LoginScreen() }
+            composable(Screens.Login.route) { LoginScreen(navController) }
             composable(Screens.RecipeDetails.route) { backStackEntry ->
                 RecipeDetailsScreen(recipeId = backStackEntry.arguments?.getString("recipeId") ?: "")
             }
