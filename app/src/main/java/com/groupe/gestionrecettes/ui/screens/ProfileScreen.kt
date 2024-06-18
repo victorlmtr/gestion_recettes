@@ -44,7 +44,7 @@ fun ProfileScreen(navController: NavController) {
                 Button(onClick = {
                     navController.navigate(Screens.Login.route)
                 }) {
-                    Text("Go to Lognn")
+                    Text("Go to Login")
                 }
             }
         }
