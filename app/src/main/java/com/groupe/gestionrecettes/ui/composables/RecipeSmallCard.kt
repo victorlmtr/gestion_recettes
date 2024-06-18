@@ -57,27 +57,27 @@ fun RecipeSmallCard(
                     Text(
                         text = recipeName,
                         style = MaterialTheme.typography.titleMedium,
-                        modifier = Modifier.padding(bottom = 8.dp)
+                        modifier = Modifier.padding(top = 8.dp)
                     )
-                    StarRating(rating = rating)
-
+                    Row(
+                        modifier = Modifier.padding(top = 0.dp),
+                        verticalAlignment = Alignment.CenterVertically) {
+                        StarRating(rating = rating, 5)
+                        RecipeLength("1h30")
+                    }
                     Row {
                         UnselectableChipIcon(
                             label = "Bœuf",
                             iconRes = R.drawable.beef,
                         )
-
                         Spacer(modifier = Modifier.width(4.dp))
-
                         UnselectableChip(
                             label = "Belgique",
                         )
+                        
                     }
 
-                    UnselectableChipIcon(
-                        label = "30 min",
-                        iconRes = R.drawable.clock,
-                    )
+
                 }
 
                 Image(
@@ -96,7 +96,7 @@ fun RecipeSmallCard(
             count = badgeCount,
             modifier = Modifier
                 .align(Alignment.TopEnd)
-                .offset(x = (-8).dp, y = 8.dp)
+                .offset(x = 8.dp, y = (-4).dp)
         )
     }
 }
