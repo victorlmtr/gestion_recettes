@@ -18,26 +18,21 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.groupe.gestionrecettes.R
+import com.groupe.gestionrecettes.data.Screens
 import com.groupe.gestionrecettes.ui.composables.CtaButton
 import com.groupe.gestionrecettes.ui.composables.PasswordTextField
 import com.groupe.gestionrecettes.ui.composables.UserNameTextField
 import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
-
-@Preview(showBackground = true)
 @Composable
-fun LoginScreenPreview() {
-    LoginScreen()
-}
-
-@Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavController) {
     val userName = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
     GestionRecettesTheme {
@@ -58,8 +53,7 @@ fun LoginScreen() {
                 Text(
                     text = "Bienvenue !",
                     style = MaterialTheme.typography.titleLarge.copy(
-                        color = MaterialTheme.colorScheme.primary
-                    ),
+                        color = MaterialTheme.colorScheme.primary                    ),
                     modifier = Modifier.padding(vertical = 20.dp),
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold
@@ -69,7 +63,11 @@ fun LoginScreen() {
                 UserNameTextField(userName = userName)
                 PasswordTextField(password = password)
                 CtaButton(label = "Connexion") {
+                    navController.navigate(Screens.Profile.route)
                 }
+                Spacer(
+                    modifier = Modifier.height(5.dp)
+                )
                 Text(
                     text = "Mot de passe oublié ?",
                     modifier = Modifier.clickable { }
@@ -90,5 +88,10 @@ fun LoginScreen() {
     }
 }
 
-
+@Preview(showBackground = true)
+@Composable
+fun LoginScreenPreview() {
+    val navController = rememberNavController()
+    LoginScreen(navController)
+}
 

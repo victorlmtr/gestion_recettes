@@ -3,6 +3,7 @@ package com.groupe.gestionrecettes.ui.composables
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -17,14 +18,17 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.groupe.gestionrecettes.R
+import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
 
 @Preview(showBackground = true)
 @Composable
 fun PasswordTextFieldPreview() {
-    val password = remember { mutableStateOf("") }
-    PasswordTextField(
-        password = password
-    )
+    GestionRecettesTheme {
+        val password = remember { mutableStateOf("") }
+        PasswordTextField(
+            password = password
+        )
+    }
 }
 
 
@@ -37,7 +41,7 @@ fun PasswordTextField(password: MutableState<String>) {
             password.value = newText
         },
         placeholder = {
-            Text(text = "Mot de passe…")
+            Text(text = "Mot de passe")
         },
         label = {
             Text(text = "Mot de passe ")
@@ -49,7 +53,7 @@ fun PasswordTextField(password: MutableState<String>) {
         },
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = Color.Black,
-            unfocusedBorderColor = Color.Green,
+            unfocusedBorderColor = MaterialTheme.colorScheme.primary
         )
     )
 }

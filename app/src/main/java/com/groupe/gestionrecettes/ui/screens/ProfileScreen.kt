@@ -20,7 +20,6 @@ import androidx.navigation.compose.rememberNavController
 import com.groupe.gestionrecettes.data.Screens
 import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
 
-
 @Composable
 fun ProfileScreen(navController: NavController) {
     GestionRecettesTheme {
