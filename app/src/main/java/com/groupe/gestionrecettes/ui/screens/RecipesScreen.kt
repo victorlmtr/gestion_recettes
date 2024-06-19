@@ -38,6 +38,10 @@ fun RecipesScreen(navController: NavController) {
     ) {
         Text("Recipes Screen", style = MaterialTheme.typography.titleLarge)
         Spacer(modifier = Modifier.height(20.dp))
+        RecipeSmallCard(recipeName = "Carbonade flamande", imageRes = R.drawable.carbonade2, 3.5f, 2)
+        RecipeSmallCard(recipeName = "Chana masala", imageRes = R.drawable.chana2, 5.0f, 2)
+        RecipeSmallCard(recipeName = "Carbonade flamande", imageRes = R.drawable.carbonade2, 2.0f, 8)
+        RecipeSmallCard(recipeName = "Chana masala", imageRes = R.drawable.chana4, 4.5f, 1)
         Button(onClick = {
             navController.navigate(Screens.RecipeDetails.createRoute("123")) // Example recipe ID
         }) {
@@ -50,6 +54,8 @@ fun RecipesScreen(navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun RecipesScreenPreview() {
+    GestionRecettesTheme {
     val navController = rememberNavController()
     RecipesScreen(navController)
+        }
 }

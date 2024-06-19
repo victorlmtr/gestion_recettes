@@ -1,9 +1,12 @@
 package com.groupe.gestionrecettes.ui.composables
 
+import android.graphics.drawable.Icon
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.LockClock
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -21,53 +24,92 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.groupe.gestionrecettes.R
+import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
 
 @Composable
 fun RecipeSmallCard(
     recipeName: String,
     @DrawableRes imageRes: Int,
+    rating: Float,
+    badgeCount: Int,
     modifier: Modifier = Modifier
 ) {
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(8.dp),
-        shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-    ) {
-        Row(
-            modifier = Modifier.padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+    Box(modifier = modifier.padding(8.dp)) {
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(120.dp),
+            shape = RoundedCornerShape(8.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
         ) {
+            Row(
+                modifier = Modifier.fillMaxSize(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 4.dp, end = 8.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.Start
+                ) {
+                    Text(
+                        text = recipeName,
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier.padding(bottom = 8.dp)
+                    )
+                    StarRating(rating = rating)
 
-            Text(
-                text = recipeName,
-                style = MaterialTheme.typography.titleSmall,
-                modifier = Modifier.weight(1f)
-            )
-            var isVegetableChipSelected by remember { mutableStateOf(false) }
-            FilterChipIcon(label = "Bœuf",
-                iconRes = R.drawable.beef,
-                selected = isVegetableChipSelected,
-                onSelectedChange = { isVegetableChipSelected = it })
-            var isBelgiumChipSelected by remember { mutableStateOf(false) }
-            FilterChip("Belgique", selected = isBelgiumChipSelected, onSelectedChange = { isBelgiumChipSelected = it})
-            Image(
-                painter = painterResource(id = imageRes),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .size(64.dp)
-                    .clip(RoundedCornerShape(8.dp))
-            )
+                    Row {
+                        UnselectableChipIcon(
+                            label = "Bœuf",
+                            iconRes = R.drawable.beef,
+                        )
+
+                        Spacer(modifier = Modifier.width(4.dp))
+
+                        UnselectableChip(
+                            label = "Belgique",
+                        )
+                    }
+
+                    UnselectableChipIcon(
+                        label = "30 min",
+                        iconRes = R.drawable.clock,
+                    )
+                }
+
+                Image(
+                    painter = painterResource(id = imageRes),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .aspectRatio(1f)
+                        .clip(RoundedCornerShape(8.dp))
+                )
+            }
         }
+
+        Badge(
+            count = badgeCount,
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .offset(x = (-8).dp, y = 8.dp)
+        )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun RecipeSmallCardPreview() {
-    RecipeSmallCard(recipeName = "Carbonade flamande", imageRes = R.drawable.carbonade2)
+    GestionRecettesTheme {
+        RecipeSmallCard(
+            recipeName = "Carbonade flamande",
+            imageRes = R.drawable.carbonade2,
+            rating = 3.5f,
+            badgeCount = 4
+        )
+    }
 }
