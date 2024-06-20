@@ -35,6 +35,7 @@ fun HomeScreenContent() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
+
             Column(
                 modifier = Modifier
                     .fillMaxSize()
