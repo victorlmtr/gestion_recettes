@@ -30,9 +30,15 @@ import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
 fun RecipeSmallCard(
     recipeName: String,
     @DrawableRes imageRes: Int,
+    chipLabel1: String,
+    chipLabel2: String,
+    chipIcon1: Int,
+    recipeLength: String,
+    userCount: Int,
     rating: Float,
     badgeCount: Int,
     modifier: Modifier = Modifier
+
 ) {
     Box(modifier = modifier.padding(8.dp)) {
         Card(
@@ -44,15 +50,16 @@ fun RecipeSmallCard(
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
         ) {
             Row(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(start = 8.dp), // Increased left margin
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column(
                     modifier = Modifier
                         .weight(1f)
-                        .padding(start = 4.dp, end = 8.dp),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.Start
+                        .padding(end = 8.dp),
+                    verticalArrangement = Arrangement.Center
                 ) {
                     Text(
                         text = recipeName,
@@ -60,24 +67,24 @@ fun RecipeSmallCard(
                         modifier = Modifier.padding(top = 8.dp)
                     )
                     Row(
-                        modifier = Modifier.padding(top = 0.dp),
-                        verticalAlignment = Alignment.CenterVertically) {
-                        StarRating(rating = rating, 5)
-                        RecipeLength("1h30")
+                        modifier = Modifier.padding(top = 4.dp), // Added some space above
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        StarRating(rating = rating, userCount)
+                        Spacer(modifier = Modifier.width(4.dp)) // Added space between rating and length
+                        RecipeLength(recipeLength)
                     }
                     Row {
                         UnselectableChipIcon(
-                            label = "Bœuf",
-                            iconRes = R.drawable.beef,
+                            label = chipLabel1,
+                            iconRes = chipIcon1,
                         )
                         Spacer(modifier = Modifier.width(4.dp))
                         UnselectableChip(
-                            label = "Belgique",
+                            label = chipLabel2,
                         )
-                        
+
                     }
-
-
                 }
 
                 Image(
@@ -108,7 +115,12 @@ fun RecipeSmallCardPreview() {
         RecipeSmallCard(
             recipeName = "Carbonade flamande",
             imageRes = R.drawable.carbonade2,
-            rating = 3.5f,
+            chipLabel1 = "Végétarien",
+            chipLabel2 = "Bosnie-Herzégovine",
+            chipIcon1 = R.drawable.beef,
+            recipeLength = "1 h 30",
+            userCount = 100,
+            rating = 4.5f,
             badgeCount = 4
         )
     }

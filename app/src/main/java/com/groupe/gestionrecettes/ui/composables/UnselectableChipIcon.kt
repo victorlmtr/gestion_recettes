@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.groupe.gestionrecettes.R
 import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
@@ -47,17 +48,17 @@ fun UnselectableChipIcon(
                 color = Color.Transparent,
                 shape = RoundedCornerShape(8.dp)
             )
-            .padding(horizontal = 12.dp, vertical = 6.dp)
+            .padding(horizontal = 8.dp, vertical = 6.dp)
     ) {
         Icon(
             painter = painterResource(id = iconRes),
             contentDescription = label,
-            modifier = Modifier.size(FilterChipDefaults.IconSize),
+            modifier = Modifier.size(14.dp),
             tint = MaterialTheme.colorScheme.primary
         )
         Text(
             text = label,
-            style = MaterialTheme.typography.labelLarge,
+            style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }
