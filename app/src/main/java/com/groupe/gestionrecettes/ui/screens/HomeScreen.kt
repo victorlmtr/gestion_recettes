@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -21,6 +22,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.groupe.gestionrecettes.R
+import com.groupe.gestionrecettes.data.recipes
+import com.groupe.gestionrecettes.ui.composables.RecipeCarousel
+import com.groupe.gestionrecettes.ui.composables.SearchBar
 import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
 
 @Composable
@@ -35,22 +39,36 @@ fun HomeScreenContent() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(15.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+            LazyColumn(
+                modifier = Modifier.fillMaxSize()
             ) {
-                Text(
-                    "Home Screen",
-                    style = MaterialTheme.typography.titleLarge,
-                    modifier = Modifier.padding(vertical = 20.dp)
-                )
+                item {
+                    SearchBar()
+                }
+                item {
+                    SectionTitle(title = "Ça pourrait vous plaire")
+                    RecipeCarousel(recipes = recipes)
+                }
+                item {
+                    SectionTitle(title = "Végétarien")
+                    RecipeCarousel(recipes = recipes)
+                }
+                item {
+                    SectionTitle(title = "Postés récemment")
+                    RecipeCarousel(recipes = recipes)
+                }
             }
         }
     }
+}
+
+@Composable
+fun SectionTitle(title: String) {
+    Text(
+        title,
+        style = MaterialTheme.typography.titleMedium,
+        modifier = Modifier.padding(vertical = 16.dp, horizontal = 16.dp)
+    )
 }
 
 @Preview(showBackground = true)
@@ -58,3 +76,4 @@ fun HomeScreenContent() {
 fun HomeScreenPreview() {
     HomeScreenContent()
 }
+

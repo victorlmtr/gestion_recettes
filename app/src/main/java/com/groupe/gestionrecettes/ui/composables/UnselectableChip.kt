@@ -21,7 +21,7 @@ fun UnselectableChip(
 ) {
     Text(
         text = label,
-        style = MaterialTheme.typography.labelLarge,
+        style = MaterialTheme.typography.labelMedium,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
         modifier = modifier
             .padding(vertical = 8.dp)
@@ -35,7 +35,7 @@ fun UnselectableChip(
                 color = Color.Transparent,
                 shape = RoundedCornerShape(8.dp)
             )
-            .padding(horizontal = 16.dp, vertical = 6.dp)
+            .padding(horizontal = 8.dp, vertical = 6.dp)
     )
 }
 

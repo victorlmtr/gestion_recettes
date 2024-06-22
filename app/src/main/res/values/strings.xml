@@ -5,14 +5,14 @@
     <string name="bottom_navigation_recipes">Recettes</string>
     <string name="bottom_navigation_inventory">Courses</string>
     <string name="placeholder_search">Rechercher…</string>
-    <string name="title_activity_home">Home</string>
-    <string name="question_count">\u00A0of %d</string>
+    <string name="title_activity_home">Accueil</string>
+    <string name="question_count">\u00A0sur %d</string>
     <string name="dismiss">Dismiss</string>
     <string name="next">Suivant</string>
     <string name="previous">Précédent</string>
-    <string name="done">Done</string>
+    <string name="done">Ok</string>
     <string name="back">Retour</string>
     <string name="close">Fermer</string>
-    <string name="show_password">Show password</string>
-    <string name="hide_password">Hide password</string>
+    <string name="show_password">Afficher le mot de passe</string>
+    <string name="hide_password">Cacher le mot de passe</string>
 </resources>

@@ -274,17 +274,18 @@ val unspecified_scheme = ColorFamily(
 
 @Composable
 fun GestionRecettesTheme(
-    useDarkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable() () -> Unit
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
 ) {
-    val colors = if (!useDarkTheme) {
-        lightScheme
-    } else {
+    val colorScheme = if (darkTheme) {
         darkScheme
+    } else {
+        lightScheme
     }
 
     MaterialTheme(
-        colorScheme = colors,
+        colorScheme = colorScheme,
+        shapes = Shapes,
         content = content
     )
 }

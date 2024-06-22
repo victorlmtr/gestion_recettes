@@ -1,8 +1,10 @@
 package com.groupe.gestionrecettes.ui.composables
 
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.StarHalf
 import androidx.compose.material.icons.filled.Star
@@ -66,7 +68,7 @@ fun StarRating(
             text = "($userCount)",
             color = MaterialTheme.colorScheme.outline,
             style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(start = 0.dp)
+            modifier = Modifier.padding(start = 4.dp)
         )
     }
 }
