@@ -40,27 +40,21 @@ fun CreateAccountScreen(context: Context) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(text = "Inscription", style = MaterialTheme.typography.headlineMedium)
-
             Spacer(modifier = Modifier.height(32.dp))
-
             OutlinedTextField(
                 value = username,
                 onValueChange = { username = it },
                 label = { Text("Nom d'utilisateur*") },
                 modifier = Modifier.fillMaxWidth()
             )
-
             Spacer(modifier = Modifier.height(16.dp))
-
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
                 label = { Text("Email*") },
                 modifier = Modifier.fillMaxWidth()
             )
-
             Spacer(modifier = Modifier.height(16.dp))
-
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
@@ -68,36 +62,23 @@ fun CreateAccountScreen(context: Context) {
                 visualTransformation = PasswordVisualTransformation(),
                 modifier = Modifier.fillMaxWidth()
             )
-
             Spacer(modifier = Modifier.height(32.dp))
-
             Button(
                 onClick = {
-
                     if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
-
                         // Display a toast message
-
                         Toast.makeText(
                             context,
                             "Veuillez remplir tous les champs",
                             Toast.LENGTH_SHORT
                         ).show()
-
                     } else {
-
                         // Handle the signup logic here
-
                         Toast.makeText(context, "Inscription réussie", Toast.LENGTH_SHORT).show()
-
                     }
-
                 },
-
                 modifier = Modifier.align(Alignment.CenterHorizontally)
-
             ) {
-
                 Text("Suivant")
             }
         }
