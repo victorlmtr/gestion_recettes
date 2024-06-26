@@ -21,19 +21,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.groupe.gestionrecettes.R
 import com.groupe.gestionrecettes.data.recipes
 import com.groupe.gestionrecettes.ui.composables.RecipeCarousel
 import com.groupe.gestionrecettes.ui.composables.SearchBar
+import com.groupe.gestionrecettes.ui.composables.SelectableChipIcon
 import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
 
 @Composable
 fun HomeScreen(navController: NavController) {
-    HomeScreenContent()
-}
-
-@Composable
-fun HomeScreenContent() {
     GestionRecettesTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -47,15 +44,19 @@ fun HomeScreenContent() {
                 }
                 item {
                     SectionTitle(title = "Ça pourrait vous plaire")
-                    RecipeCarousel(recipes = recipes)
+                    RecipeCarousel(recipes = recipes, navController = navController)
                 }
                 item {
                     SectionTitle(title = "Végétarien")
-                    RecipeCarousel(recipes = recipes)
+                    RecipeCarousel(recipes = recipes, navController = navController)
                 }
                 item {
                     SectionTitle(title = "Postés récemment")
-                    RecipeCarousel(recipes = recipes)
+                    RecipeCarousel(recipes = recipes, navController = navController)
+                }
+                item {
+                    SectionTitle(title = "Les plus likés")
+                    RecipeCarousel(recipes = recipes, navController = navController)
                 }
             }
         }
@@ -67,13 +68,17 @@ fun SectionTitle(title: String) {
     Text(
         title,
         style = MaterialTheme.typography.titleMedium,
-        modifier = Modifier.padding(vertical = 16.dp, horizontal = 16.dp)
+        modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp)
     )
 }
 
 @Preview(showBackground = true)
 @Composable
-fun HomeScreenPreview() {
-    HomeScreenContent()
+fun RecipeCarouselPreview() {
+    val navController = rememberNavController()
+    GestionRecettesTheme {
+        HomeScreen(navController)
+    }
+
 }
 
