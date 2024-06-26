@@ -7,6 +7,7 @@ data class IngredientCategory(
 )
 
 val ingredientCategories = listOf(
+    IngredientCategory(0, "Légumes", R.drawable.vegetables),
     IngredientCategory(1, "Légumes", R.drawable.vegetables),
     IngredientCategory(2, "Fruits", R.drawable.fruits),
     IngredientCategory(3, "Huiles", R.drawable.oil),
