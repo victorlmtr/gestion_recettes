@@ -3,6 +3,7 @@ package com.groupe.gestionrecettes.ui.composables
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -43,19 +44,21 @@ fun RecipeBigCard(
     userCount: Int,
     rating: Float,
     badgeCount: Int,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(modifier = modifier.padding(8.dp)) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(240.dp),  // Increased height
+                .height(240.dp),
             shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
         ) {
             Column(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxSize().clickable(onClick = onClick),
+
                 verticalArrangement = Arrangement.SpaceEvenly
             ) {
                 Box(
@@ -140,7 +143,8 @@ fun RecipeBigCardPreview() {
             recipeLength = "1 h 30",
             userCount = 100,
             rating = 4.5f,
-            badgeCount = 4
+            badgeCount = 4,
+            onClick =  {}
         )
     }
 }
