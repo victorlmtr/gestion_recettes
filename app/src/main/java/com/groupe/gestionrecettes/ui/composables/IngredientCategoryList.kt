@@ -1,6 +1,6 @@
 package com.groupe.gestionrecettes.ui.composables
 
-import IngredientCategory
+import OldIngredientCategory
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
@@ -10,10 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
-import ingredientCategories
+import oldIngredientCategories
 
 @Composable
-fun IngredientCategoryList(categories: List<IngredientCategory>) {
+fun IngredientCategoryList(categories: List<OldIngredientCategory>) {
     Column(
         modifier = Modifier.padding(16.dp)
     ) {
@@ -39,5 +39,5 @@ fun IngredientCategoryList(categories: List<IngredientCategory>) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewIngredientCategoryList() {
-    IngredientCategoryList(categories = ingredientCategories)
+    IngredientCategoryList(categories = oldIngredientCategories)
 }

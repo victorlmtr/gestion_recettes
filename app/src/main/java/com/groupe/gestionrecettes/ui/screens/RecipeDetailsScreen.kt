@@ -53,14 +53,14 @@ fun RecipeDetailsScreen(recipeId: Int?, content: @Composable (PaddingValues) -> 
                     SurveyTopAppBar(
                         questionIndex = 0,
                         totalQuestionsCount = 3,
-                        recipeName = recipe.name
+                        stepName = recipe.name
                     ) {}
                 },
                 content = {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(16.dp)
+                            .padding(18.dp)
                             .padding(top = 56.dp),  // Add padding to account for the TopAppBar height
                         verticalArrangement = Arrangement.Top,
                         horizontalAlignment = Alignment.CenterHorizontally
@@ -69,11 +69,10 @@ fun RecipeDetailsScreen(recipeId: Int?, content: @Composable (PaddingValues) -> 
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(vertical = 8.dp),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            horizontalArrangement = Arrangement.SpaceEvenly
                         ) {
                             UnselectableChip("Tunisie")
                             UnselectableChipIcon("Végétarien", R.drawable.vegetables)
-                            UnselectableChipIcon("Œufs", R.drawable.dairy)
                             UnselectableChip("Afrique du Nord")
                         }
 

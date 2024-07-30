@@ -5,10 +5,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -32,9 +30,9 @@ fun RecipeCarousel(recipes: List<Recipe>) {
             RecipeBigCard(
                 recipeName = recipes[index].name,
                 imageRes = recipes[index].imageRes,
-                chipLabel1 = recipes[index].chipLabel1,
-                chipLabel2 = recipes[index].chipLabel2,
-                chipIcon1 = recipes[index].chipIcon1,
+                chipLabel1 = recipes[index].category,
+                chipLabel2 = recipes[index].country,
+                chipIcon1 = recipes[index].categoryIcon,
                 recipeLength = recipes[index].length,
                 userCount = recipes[index].userCount,
                 rating = recipes[index].rating,
