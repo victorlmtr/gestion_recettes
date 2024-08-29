@@ -6,7 +6,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface CategoryApi {
+interface IngredientCategoryApiService {
     @GET("/api/ingredient-categories")
     suspend fun getCategories(): List<IngredientCategory>
 

@@ -13,6 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.groupe.gestionrecettes.data.recipes
 import com.groupe.gestionrecettes.ui.composables.SurveyTopAppBar
 import com.groupe.gestionrecettes.ui.composables.UnselectableChip
@@ -24,7 +26,7 @@ import com.groupe.gestionrecettes.ui.composables.SurveyBottomBar
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun RecipeDetailsScreen(recipeId: Int?, content: @Composable (PaddingValues) -> Unit) {
+fun RecipeDetailsScreen(navController: NavController, recipeId: Int?, content: @Composable (PaddingValues) -> Unit) {
     // Find the recipe by recipeId
     val recipe = recipeId?.let { id ->
         recipes.find { it.id == id }
@@ -121,6 +123,7 @@ fun RecipeDetailsScreen(recipeId: Int?, content: @Composable (PaddingValues) -> 
 @Composable
 fun RecipeDetailsScreenPreview() {
     GestionRecettesTheme {
-        RecipeDetailsScreen(1, {})
+        val navController = rememberNavController()
+        RecipeDetailsScreen(navController, 0, {})
     }
 }

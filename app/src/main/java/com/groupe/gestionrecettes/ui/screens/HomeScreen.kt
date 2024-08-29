@@ -44,19 +44,19 @@ fun HomeScreen(navController: NavController) {
                 }
                 item {
                     SectionTitle(title = "Ça pourrait vous plaire")
-                    RecipeCarousel(recipes = recipes, navController = navController)
+                    RecipeCarousel(navController = navController, recipes = recipes)
                 }
                 item {
                     SectionTitle(title = "Végétarien")
-                    RecipeCarousel(recipes = recipes, navController = navController)
+                    RecipeCarousel(navController = navController, recipes = recipes)
                 }
                 item {
                     SectionTitle(title = "Postés récemment")
-                    RecipeCarousel(recipes = recipes, navController = navController)
+                    RecipeCarousel(navController = navController, recipes = recipes)
                 }
                 item {
                     SectionTitle(title = "Les plus likés")
-                    RecipeCarousel(recipes = recipes, navController = navController)
+                    RecipeCarousel(navController = navController, recipes = recipes)
                 }
             }
         }
