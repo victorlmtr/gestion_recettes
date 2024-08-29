@@ -25,7 +25,7 @@ fun RecipeSmallCardClickable(recipe: Recipe, onClick: () -> Unit) {
             recipeName = recipe.name,
             imageRes = recipe.imageRes,
             chipLabel1 = recipe.category,
-            chipLabel2 = recipe.country.name,
+            chipLabel2 = recipe.country,
             chipIcon1 = recipe.categoryIcon,
             recipeLength = recipe.length,
             userCount = recipe.userCount,

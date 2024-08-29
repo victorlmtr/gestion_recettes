@@ -25,14 +25,14 @@ import com.groupe.gestionrecettes.R
 
 @Composable
 private fun TopAppBarTitle(
-    recipeName: String,
+    stepName: String,
     questionIndex: Int,
     totalQuestionsCount: Int,
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier) {
         Text(
-            text = recipeName,
+            text = stepName,
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
         )
@@ -53,7 +53,7 @@ private fun TopAppBarTitle(
 @OptIn(ExperimentalMaterial3Api::class) // CenterAlignedTopAppBar is experimental in m3
 @Composable
 fun SurveyTopAppBar(
-    recipeName: String,
+    stepName: String,
     questionIndex: Int,
     totalQuestionsCount: Int,
     onClosePressed: () -> Unit
@@ -64,7 +64,7 @@ fun SurveyTopAppBar(
             title = {
                 TopAppBarTitle(
                     questionIndex = questionIndex,
-                    totalQuestionsCount = totalQuestionsCount, recipeName = recipeName)
+                    totalQuestionsCount = totalQuestionsCount, stepName = stepName)
             },
             actions = {
                 IconButton(
@@ -88,7 +88,7 @@ fun SurveyTopAppBar(
             progress = animatedProgress,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp),
+                .padding(horizontal = 0.dp),
             trackColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
         )
     }
@@ -101,6 +101,6 @@ private fun SurveyTopAppBarPreview() {
         questionIndex = 0,
         totalQuestionsCount = 3,
         onClosePressed = {},
-        recipeName = "Shakshouka"
+        stepName = "Shakshouka"
     )
 }
