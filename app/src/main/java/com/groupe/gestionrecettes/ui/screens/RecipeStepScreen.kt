@@ -48,7 +48,7 @@ fun RecipeStepScreen(navController: NavController, recipeId: Int, stepIndex: Int
                     SurveyTopAppBar(
                         questionIndex = stepIndex + 1,
                         totalQuestionsCount = recipe.steps.size + 1,
-                        recipeName = recipe.name,
+                        stepName = recipe.name,
                         onClosePressed = {
                             navController.navigate(Screens.Recipes.route)
                         }

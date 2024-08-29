@@ -9,16 +9,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
 import com.groupe.gestionrecettes.data.Recipe
+import com.groupe.gestionrecettes.data.Screens
 import com.groupe.gestionrecettes.data.recipes
 import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun RecipeCarousel(recipes: List<Recipe>) {
+fun RecipeCarousel(navController: NavController, recipes: List<Recipe>) {
     val pagerState = rememberPagerState()
 
     LazyRow(
@@ -36,7 +39,10 @@ fun RecipeCarousel(recipes: List<Recipe>) {
                 recipeLength = recipes[index].length,
                 userCount = recipes[index].userCount,
                 rating = recipes[index].rating,
-                badgeCount = recipes[index].badgeCount
+                badgeCount = recipes[index].badgeCount,
+                onClick = {
+                    navController.navigate(Screens.RecipeDetails.createRoute(recipes[index].id))
+                }
             )
         }
     }
@@ -53,6 +59,7 @@ fun RecipeCarousel(recipes: List<Recipe>) {
 @Composable
 fun RecipeCarouselPreview() {
     GestionRecettesTheme {
-        RecipeCarousel(recipes = recipes)
+        val navController = rememberNavController()
+        RecipeCarousel(navController = navController, recipes = recipes)
     }
 }

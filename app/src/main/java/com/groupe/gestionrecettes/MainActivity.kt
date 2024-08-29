@@ -3,6 +3,7 @@ package com.groupe.gestionrecettes
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,7 +28,9 @@ import androidx.navigation.compose.rememberNavController
 import com.groupe.gestionrecettes.ui.composables.BottomNavigationBar
 import com.groupe.gestionrecettes.ui.composables.MainNavigationContent
 import com.groupe.gestionrecettes.ui.composables.SearchBar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

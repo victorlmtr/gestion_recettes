@@ -13,5 +13,9 @@ data class Ingredient(
 data class IngredientCategory(
     val id: Int,
     val libCategorieIngredient: String,
-    val iconeCategorieIngredient: String
-)
+    var iconeCategorieIngredient: String
+) {
+    override fun hashCode(): Int {
+        return libCategorieIngredient.hashCode()
+    }
+}
