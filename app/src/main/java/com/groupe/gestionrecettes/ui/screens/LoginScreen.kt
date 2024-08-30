@@ -1,21 +1,12 @@
 package com.groupe.gestionrecettes.ui.screens
 
-
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -26,15 +17,21 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.groupe.gestionrecettes.R
-import com.groupe.gestionrecettes.data.Screens
+import com.groupe.gestionrecettes.data.viewmodel.AuthViewModel
 import com.groupe.gestionrecettes.ui.composables.CtaButton
 import com.groupe.gestionrecettes.ui.composables.PasswordTextField
 import com.groupe.gestionrecettes.ui.composables.UserNameTextField
 import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.groupe.gestionrecettes.data.Screens
+
 @Composable
 fun LoginScreen(navController: NavController) {
+    val authViewModel: AuthViewModel = viewModel()
     val userName = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
+    val loginState by authViewModel.loginState.collectAsState()
+
     GestionRecettesTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -53,7 +50,8 @@ fun LoginScreen(navController: NavController) {
                 Text(
                     text = "Bienvenue !",
                     style = MaterialTheme.typography.titleLarge.copy(
-                        color = MaterialTheme.colorScheme.primary                    ),
+                        color = MaterialTheme.colorScheme.primary
+                    ),
                     modifier = Modifier.padding(vertical = 20.dp),
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold
@@ -62,19 +60,36 @@ fun LoginScreen(navController: NavController) {
 
                 UserNameTextField(userName = userName)
                 PasswordTextField(password = password)
+
                 CtaButton(label = "Connexion") {
-                    navController.navigate(Screens.Profile.route)
+                    authViewModel.login(userName.value, password.value)
                 }
-                Spacer(
-                    modifier = Modifier.height(5.dp)
-                )
+
+                Spacer(modifier = Modifier.height(5.dp))
+
+                when (loginState) {
+                    is AuthViewModel.LoginState.Loading -> {
+                        Text(text = "Chargement...")
+                    }
+                    is AuthViewModel.LoginState.Success -> {
+                        // Navigate to the next screen after successful login
+                        navController.navigate(Screens.Profile.route)
+                    }
+                    is AuthViewModel.LoginState.Error -> {
+                        Text(text = "Erreur : ${(loginState as AuthViewModel.LoginState.Error).message}")
+                    }
+                    else -> Unit
+                }
+
+                Spacer(modifier = Modifier.height(25.dp))
+
                 Text(
                     text = "Mot de passe oublié ?",
                     modifier = Modifier.clickable { }
                 )
-                Spacer(
-                    modifier = Modifier.height(25.dp)
-                )
+
+                Spacer(modifier = Modifier.height(25.dp))
+
                 Text(
                     text = "Première connexion ? ",
                     fontWeight = FontWeight.Bold
@@ -94,4 +109,3 @@ fun LoginScreenPreview() {
     val navController = rememberNavController()
     LoginScreen(navController)
 }
-
