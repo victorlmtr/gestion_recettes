@@ -3,6 +3,7 @@ package com.groupe.gestionrecettes.data.api
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface AuthApiService {
     @FormUrlEncoded
@@ -12,8 +13,7 @@ interface AuthApiService {
         @Field("password") password: String
     ): LoginResponse
 }
-
 data class LoginResponse(
-    val accessToken: String,
-    val refreshToken: String
+    val accessToken: String?,
+    val refreshToken: String?
 )

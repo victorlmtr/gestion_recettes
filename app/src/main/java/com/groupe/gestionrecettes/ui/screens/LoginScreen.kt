@@ -56,7 +56,7 @@ fun LoginScreen(navController: NavController) {
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold
                 )
-                Text(text = "Connectez vous à votre compte")
+                Text(text = "Connectez-vous à votre compte")
 
                 UserNameTextField(userName = userName)
                 PasswordTextField(password = password)
@@ -72,7 +72,6 @@ fun LoginScreen(navController: NavController) {
                         Text(text = "Chargement...")
                     }
                     is AuthViewModel.LoginState.Success -> {
-                        // Navigate to the next screen after successful login
                         navController.navigate(Screens.Profile.route)
                     }
                     is AuthViewModel.LoginState.Error -> {

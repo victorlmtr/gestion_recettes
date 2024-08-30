@@ -1,46 +1,48 @@
 package com.groupe.gestionrecettes.data.viewmodel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.groupe.gestionrecettes.data.SessionManager
 import com.groupe.gestionrecettes.data.api.RetrofitInstance
 import com.groupe.gestionrecettes.data.api.UserApiService
+import com.groupe.gestionrecettes.data.model.GroceryListDto  // Import the DTOs
+import com.groupe.gestionrecettes.data.model.IngredientDto  // Import the DTOs
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import android.util.Log
-import com.groupe.gestionrecettes.data.TokenManager
 
 class UserViewModel(context: Context) : ViewModel() {
-    private val userApiService = RetrofitInstance.userApiService
-    private val tokenManager = TokenManager(context)
+    private val userApiService: UserApiService = RetrofitInstance.userApiService
+    private val sessionManager = SessionManager(context)
 
- //   private val _userGroceries = MutableStateFlow<List<Groceries>>(emptyList())
- //   val userGroceries: StateFlow<List<Groceries>> = _userGroceries
+    // Define MutableStateFlows for groceries and ingredients
+    private val _groceryList = MutableStateFlow<List<GroceryListDto>>(emptyList())
+    val groceryList: StateFlow<List<GroceryListDto>> = _groceryList
 
- //   private val _userFavorites = MutableStateFlow<List<Favorites>>(emptyList())
- //   val userFavorites: StateFlow<List<Favorites>> = _userFavorites
+    private val _ingredients = MutableStateFlow<List<IngredientDto>>(emptyList())
+    val ingredients: StateFlow<List<IngredientDto>> = _ingredients
 
     fun fetchUserGroceries() {
         viewModelScope.launch {
-            val token = "Bearer ${tokenManager.getAccessToken()}"
             try {
-              //  val groceries = userApiService.getUserGroceries(token)
-              //  _userGroceries.value = groceries
+                val token = sessionManager.fetchAuthToken() ?: return@launch
+                _groceryList.value = userApiService.getUserGroceries("Bearer $token")
             } catch (e: Exception) {
                 Log.e("UserViewModel", "Failed to fetch groceries", e)
             }
         }
     }
 
-    fun fetchUserFavorites() {
+    fun fetchUserIngredients() {
         viewModelScope.launch {
-            val token = "Bearer ${tokenManager.getAccessToken()}"
             try {
-              //  val favorites = userApiService.getUserFavorites(token)
-              //  _userFavorites.value = favorites
+                val token = sessionManager.fetchAuthToken() ?: return@launch
+                val userId = sessionManager.fetchUserId()
+                _ingredients.value = userApiService.getUserIngredients(userId, "Bearer $token")
             } catch (e: Exception) {
-                Log.e("UserViewModel", "Failed to fetch favorites", e)
+                Log.e("UserViewModel", "Failed to fetch ingredients", e)
             }
         }
     }

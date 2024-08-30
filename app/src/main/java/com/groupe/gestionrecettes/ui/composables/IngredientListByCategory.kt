@@ -12,10 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import coil.compose.rememberImagePainter
 import com.google.accompanist.flowlayout.FlowRow
-import com.groupe.gestionrecettes.data.Ingredient
-import com.groupe.gestionrecettes.data.IngredientCategory
+import com.groupe.gestionrecettes.data.model.Ingredient
+import com.groupe.gestionrecettes.data.model.IngredientCategory
 
 @Composable
 fun IngredientListByCategory(category: IngredientCategory, ingredients: List<Ingredient>) {

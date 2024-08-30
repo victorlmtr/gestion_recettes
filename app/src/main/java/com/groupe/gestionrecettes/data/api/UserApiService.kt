@@ -1,12 +1,23 @@
 package com.groupe.gestionrecettes.data.api
 
+import com.groupe.gestionrecettes.data.model.GroceryListDto
+import com.groupe.gestionrecettes.data.model.IngredientDto
+import com.groupe.gestionrecettes.data.model.UserDto
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Path
 
 interface UserApiService {
-  //  @GET("/api/user/groceries")
-  //  suspend fun getUserGroceries(@Header("Authorization") token: String): List<Groceries>
 
-  //  @GET("/api/user/favorites")
-  //  suspend fun getUserFavorites(@Header("Authorization") token: String): List<Favorites>
+    @GET("/api/utilisateurs/{id}")
+    suspend fun getUserDetails(
+        @Path("id") id: Int,
+        @Header("Authorization") token: String
+    ): UserDto
+
+    @GET("/api/grocery-lists")
+    suspend fun getUserGroceries(@Header("Authorization") token: String): List<GroceryListDto>
+
+    @GET("/api/utilisateurs/{userId}/ingredients")
+    suspend fun getUserIngredients(@Path("userId") userId: Int, @Header("Authorization") token: String): List<IngredientDto>
 }

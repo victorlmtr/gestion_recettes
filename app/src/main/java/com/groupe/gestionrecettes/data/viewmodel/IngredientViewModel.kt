@@ -2,8 +2,8 @@ package com.groupe.gestionrecettes.data.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.groupe.gestionrecettes.data.IngredientCategory
-import com.groupe.gestionrecettes.data.Ingredient
+import com.groupe.gestionrecettes.data.model.IngredientCategory
+import com.groupe.gestionrecettes.data.model.Ingredient
 import com.groupe.gestionrecettes.data.repository.IngredientRepository
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.MutableStateFlow

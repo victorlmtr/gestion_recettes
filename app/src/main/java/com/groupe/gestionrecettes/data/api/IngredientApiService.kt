@@ -1,6 +1,6 @@
 package com.groupe.gestionrecettes.data.api
 
-import com.groupe.gestionrecettes.data.Ingredient
+import com.groupe.gestionrecettes.data.model.Ingredient
 import retrofit2.http.GET
 import retrofit2.http.Path
 
