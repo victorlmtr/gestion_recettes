@@ -6,10 +6,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.groupe.gestionrecettes.data.SessionManager
 import com.groupe.gestionrecettes.data.api.AuthApiService
+import com.groupe.gestionrecettes.data.api.LoginRequest
 import com.groupe.gestionrecettes.data.api.RetrofitInstance
 import com.groupe.gestionrecettes.data.api.UserApiService
-import com.groupe.gestionrecettes.data.model.UserDto
 import com.groupe.gestionrecettes.data.api.LoginResponse
+import com.groupe.gestionrecettes.data.model.UserDto
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -35,7 +36,8 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             _loginState.value = LoginState.Loading
             try {
-                val response: LoginResponse = authApiService.login(username, password)
+                val loginRequest = LoginRequest(username, password)
+                val response: LoginResponse = authApiService.login(loginRequest)
                 val accessToken = response.accessToken
                 val refreshToken = response.refreshToken
 

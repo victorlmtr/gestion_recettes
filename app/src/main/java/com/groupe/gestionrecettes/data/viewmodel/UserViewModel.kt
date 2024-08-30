@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.groupe.gestionrecettes.data.SessionManager
 import com.groupe.gestionrecettes.data.api.RetrofitInstance
 import com.groupe.gestionrecettes.data.api.UserApiService
-import com.groupe.gestionrecettes.data.model.GroceryListDto  // Import the DTOs
-import com.groupe.gestionrecettes.data.model.IngredientDto  // Import the DTOs
+import com.groupe.gestionrecettes.data.model.GroceryListDto
+import com.groupe.gestionrecettes.data.model.IngredientDto
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
