@@ -18,12 +18,12 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.groupe.gestionrecettes.R
-import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
+import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
 
 @Preview(showBackground = true)
 @Composable
 fun PasswordTextFieldPreview() {
-    GestionRecettesTheme {
+    ScrontchTheme {
         val password = remember { mutableStateOf("") }
         PasswordTextField(
             password = password

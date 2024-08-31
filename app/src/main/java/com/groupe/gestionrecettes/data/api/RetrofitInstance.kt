@@ -12,7 +12,7 @@ object RetrofitInstance {
     //http://10.0.2.2:8081/ for the emulator (localhost equivalent). use IPV4 laptop address for a physical device
     // http://192.168.120.82
     // home: http://192.168.1.21:8081/
-    private const val BASE_URL = "http://10.0.2.2:8081/"
+    private const val BASE_URL = "http://192.168.1.21:8081/"
 
 
     private val logging = HttpLoggingInterceptor().apply {

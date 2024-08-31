@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.groupe.gestionrecettes.ui.composables.ScreenPicker
-import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
+import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
 import com.groupe.gestionrecettes.data.viewmodel.IngredientViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.groupe.gestionrecettes.ui.composables.IngredientListByCategory
@@ -23,7 +23,7 @@ fun PantryScreen(navController: NavController, viewModel: IngredientViewModel = 
     val categoriesWithIngredients by viewModel.categoriesWithIngredients.collectAsState()
     val isLoading = categoriesWithIngredients.isEmpty()
 
-    GestionRecettesTheme {
+    ScrontchTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background

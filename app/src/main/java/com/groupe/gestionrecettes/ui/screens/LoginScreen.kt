@@ -1,5 +1,6 @@
 package com.groupe.gestionrecettes.ui.screens
 
+import AuthViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -17,11 +18,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.groupe.gestionrecettes.R
-import com.groupe.gestionrecettes.data.viewmodel.AuthViewModel
 import com.groupe.gestionrecettes.ui.composables.CtaButton
 import com.groupe.gestionrecettes.ui.composables.PasswordTextField
 import com.groupe.gestionrecettes.ui.composables.UserNameTextField
-import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
+import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.groupe.gestionrecettes.data.Screens
 
@@ -32,7 +32,7 @@ fun LoginScreen(navController: NavController) {
     val password = remember { mutableStateOf("") }
     val loginState by authViewModel.loginState.collectAsState()
 
-    GestionRecettesTheme {
+    ScrontchTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background

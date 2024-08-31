@@ -7,7 +7,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
+import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
 
 @Composable
 fun CommentCard(
@@ -57,7 +57,7 @@ fun CommentCard(
 @Preview(showBackground = true)
 @Composable
 fun CommentCardPreview() {
-    GestionRecettesTheme {
+    ScrontchTheme {
         CommentCard(
             username = "John Doe",
             starRating = 4.0f,

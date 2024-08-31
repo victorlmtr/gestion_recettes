@@ -13,12 +13,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
+import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
 
 
 @Composable
 fun CtaButton(label: String, onClickAction: () -> Unit) {
-    GestionRecettesTheme {
+    ScrontchTheme {
         val interactionSource = remember {
             MutableInteractionSource()
         }

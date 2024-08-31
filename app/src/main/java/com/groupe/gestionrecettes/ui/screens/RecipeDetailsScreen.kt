@@ -19,7 +19,7 @@ import com.groupe.gestionrecettes.data.recipes
 import com.groupe.gestionrecettes.ui.composables.SurveyTopAppBar
 import com.groupe.gestionrecettes.ui.composables.UnselectableChip
 import com.groupe.gestionrecettes.ui.composables.UnselectableChipIcon
-import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
+import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
 import com.groupe.gestionrecettes.R
 import com.groupe.gestionrecettes.ui.composables.StarRating
 import com.groupe.gestionrecettes.ui.composables.SurveyBottomBar
@@ -122,7 +122,7 @@ fun RecipeDetailsScreen(navController: NavController, recipeId: Int?, content: @
 @Preview(showBackground = true)
 @Composable
 fun RecipeDetailsScreenPreview() {
-    GestionRecettesTheme {
+    ScrontchTheme {
         val navController = rememberNavController()
         RecipeDetailsScreen(navController, 0, {})
     }

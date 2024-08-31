@@ -9,12 +9,6 @@ import retrofit2.http.Path
 
 interface UserApiService {
 
-    @GET("/api/utilisateurs/{id}")
-    suspend fun getUserDetails(
-        @Path("id") id: Int,
-        @Header("Authorization") token: String
-    ): UserDto
-
     @GET("/api/grocery-lists")
     suspend fun getUserGroceries(@Header("Authorization") token: String): List<GroceryListDto>
 

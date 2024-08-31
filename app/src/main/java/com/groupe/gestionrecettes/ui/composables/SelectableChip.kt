@@ -7,7 +7,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.material3.FilterChip
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
-import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
+import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
 
 @Composable
 fun SelectableChip(
@@ -25,7 +25,7 @@ fun SelectableChip(
 @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
 @Composable
 fun IngredientChipPreview() {
-    GestionRecettesTheme {
+    ScrontchTheme {
         var isTomatoChipSelected by remember { mutableStateOf(false) }
         SelectableChip(
             label = "Tomates",

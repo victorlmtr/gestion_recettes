@@ -16,7 +16,7 @@ import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.groupe.gestionrecettes.R
-import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
+import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
 
 @Composable
 fun SelectableChipIcon(
@@ -52,7 +52,7 @@ fun SelectableChipIcon(
 @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
 @Composable
 fun FilterChipIconPreview() {
-    GestionRecettesTheme {
+    ScrontchTheme {
         var isVegetableChipSelected by remember { mutableStateOf(false) }
         SelectableChipIcon(
             label = "Légumes",

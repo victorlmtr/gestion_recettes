@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
+import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
 
 @Composable
 fun UnselectableChip(
@@ -42,7 +42,7 @@ fun UnselectableChip(
 @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
 @Composable
 fun LabelChipPreview() {
-    GestionRecettesTheme {
+    ScrontchTheme {
         UnselectableChip(label = "Inde")
     }
 }

@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -22,10 +21,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.groupe.gestionrecettes.R
-import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
+import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
 
 @Composable
 fun UnselectableChipIcon(
@@ -67,7 +65,7 @@ fun UnselectableChipIcon(
 @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
 @Composable
 fun UnselectableChipIconPreview() {
-    GestionRecettesTheme {
+    ScrontchTheme {
         UnselectableChipIcon(label = "Légumes", iconRes = R.drawable.vegetables)
     }
 }
@@ -75,7 +73,7 @@ fun UnselectableChipIconPreview() {
 @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
 @Composable
 fun FilterChipIcon2Preview() {
-    GestionRecettesTheme {
+    ScrontchTheme {
         var isVegetableChipSelected by remember { mutableStateOf(false) }
         SelectableChipIcon(
             label = "Légumes",

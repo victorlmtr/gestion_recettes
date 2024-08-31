@@ -1,6 +1,5 @@
 package com.groupe.gestionrecettes.ui.composables
 
-import android.util.Log
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -23,7 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.groupe.gestionrecettes.R
-import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
+import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
 
 @Composable
 fun SurveyBottomBar(
@@ -83,7 +82,7 @@ fun SurveyBottomBar(
 @Preview(showBackground = true)
 @Composable
 fun SurveyBottomBarPreview() {
-    GestionRecettesTheme {
+    ScrontchTheme {
     SurveyBottomBar(
         shouldShowPreviousButton = true,
         shouldShowDoneButton = false,

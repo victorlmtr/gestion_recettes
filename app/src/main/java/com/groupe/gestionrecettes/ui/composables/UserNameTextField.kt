@@ -17,12 +17,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
+import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
 
 @Preview(showBackground = true)
 @Composable
 fun UsernameTextFieldPreview() {
-    GestionRecettesTheme {
+    ScrontchTheme {
         val userName = remember { mutableStateOf("") }
         UserNameTextField(userName = userName)
     }

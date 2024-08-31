@@ -16,7 +16,7 @@ import com.groupe.gestionrecettes.data.Screens
 import com.groupe.gestionrecettes.data.recipes
 import com.groupe.gestionrecettes.ui.composables.SurveyBottomBar
 import com.groupe.gestionrecettes.ui.composables.SurveyTopAppBar
-import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
+import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
 
 @Composable
 fun RecipeStepScreen(navController: NavController, recipeId: Int, stepIndex: Int?) {
@@ -96,7 +96,7 @@ fun RecipeStepScreen(navController: NavController, recipeId: Int, stepIndex: Int
 @Preview(showBackground = true)
 @Composable
 fun RecipeStepScreenPreview() {
-    GestionRecettesTheme {
+    ScrontchTheme {
         val navController = rememberNavController()
         RecipeStepScreen(navController, 0, 0)
     }

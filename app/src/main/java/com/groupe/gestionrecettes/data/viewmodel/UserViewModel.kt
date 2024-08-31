@@ -40,7 +40,11 @@ class UserViewModel(context: Context) : ViewModel() {
             try {
                 val token = sessionManager.fetchAuthToken() ?: return@launch
                 val userId = sessionManager.fetchUserId()
-                _ingredients.value = userApiService.getUserIngredients(userId, "Bearer $token")
+                if (userId != null) {
+                    _ingredients.value = userApiService.getUserIngredients(userId, "Bearer $token")
+                } else {
+                    Log.e("UserViewModel", "User ID is null")
+                }
             } catch (e: Exception) {
                 Log.e("UserViewModel", "Failed to fetch ingredients", e)
             }

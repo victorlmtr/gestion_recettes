@@ -16,7 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.groupe.gestionrecettes.R
-import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
+import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
 
 @Composable
 fun SearchBar(
@@ -47,5 +47,5 @@ fun SearchBar(
 @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
 @Composable
 fun SearchBarPreview() {
-    GestionRecettesTheme { SearchBar(Modifier.padding(8.dp)) }
+    ScrontchTheme { SearchBar(Modifier.padding(8.dp)) }
 }

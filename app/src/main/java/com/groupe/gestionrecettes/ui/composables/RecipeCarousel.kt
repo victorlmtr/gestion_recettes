@@ -17,7 +17,7 @@ import com.google.accompanist.pager.rememberPagerState
 import com.groupe.gestionrecettes.data.Recipe
 import com.groupe.gestionrecettes.data.Screens
 import com.groupe.gestionrecettes.data.recipes
-import com.groupe.gestionrecettes.ui.theme.GestionRecettesTheme
+import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -58,7 +58,7 @@ fun RecipeCarousel(navController: NavController, recipes: List<Recipe>) {
 @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
 @Composable
 fun RecipeCarouselPreview() {
-    GestionRecettesTheme {
+    ScrontchTheme {
         val navController = rememberNavController()
         RecipeCarousel(navController = navController, recipes = recipes)
     }
