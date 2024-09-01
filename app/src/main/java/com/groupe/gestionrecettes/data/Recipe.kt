@@ -1,7 +1,6 @@
 package com.groupe.gestionrecettes.data
 
 import com.groupe.gestionrecettes.R
-import oldIngredientCategories
 import java.util.Date
 
 data class Recipe(

@@ -1,6 +1,6 @@
 package com.groupe.gestionrecettes.ui.composables
 
-import OldIngredientCategory
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
-import oldIngredientCategories
-
+import com.groupe.gestionrecettes.data.OldIngredientCategory
+import com.groupe.gestionrecettes.data.oldIngredientCategories
 @Composable
 fun IngredientCategoryList(categories: List<OldIngredientCategory>) {
     Column(

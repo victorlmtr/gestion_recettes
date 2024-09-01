@@ -1,3 +1,5 @@
+package com.groupe.gestionrecettes.data
+
 import com.groupe.gestionrecettes.R
 
 data class OldIngredientCategory(

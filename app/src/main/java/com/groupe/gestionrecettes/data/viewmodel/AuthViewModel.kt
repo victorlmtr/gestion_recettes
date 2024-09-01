@@ -1,21 +1,28 @@
+package com.groupe.gestionrecettes.data.viewmodel
+
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.groupe.gestionrecettes.data.SessionManager
 import com.groupe.gestionrecettes.data.api.AuthApiService
 import com.groupe.gestionrecettes.data.api.LoginRequest
 import com.groupe.gestionrecettes.data.api.LoginResponse
-import com.groupe.gestionrecettes.data.api.RetrofitInstance
-import com.groupe.gestionrecettes.data.api.UserApiService
 import com.groupe.gestionrecettes.data.model.UserDto
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AuthViewModel(application: Application) : AndroidViewModel(application) {
-    private val authApiService: AuthApiService = RetrofitInstance.authApiService
-    private val sessionManager = SessionManager(application)
+@HiltViewModel
+class AuthViewModel @Inject constructor(
+    application: Application,
+    private val authApiService: AuthApiService,
+    private val sessionManager: SessionManager
+) : ViewModel() {
+
     private val _userDetails = MutableStateFlow<UserDto?>(null)
     val userDetails: StateFlow<UserDto?> = _userDetails
 
@@ -45,7 +52,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                     sessionManager.saveUserDetails(user.id, user.nomUtilisateur)
 
                     _userDetails.value = user
-                    Log.d("AuthViewModel", "User details updated: ${user.nomUtilisateur}") // Log added here
+                    Log.d("AuthViewModel", "User details updated: ${user.nomUtilisateur}")
                     _loginState.value = LoginState.Success(user)
                 } else {
                     _loginState.value = LoginState.Error("Invalid login response: missing tokens or user information")

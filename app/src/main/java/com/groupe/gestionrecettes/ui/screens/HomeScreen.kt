@@ -1,6 +1,6 @@
 package com.groupe.gestionrecettes.ui.screens
 
-import AuthViewModel
+
 import android.app.Application
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.groupe.gestionrecettes.data.Screens
@@ -19,12 +20,16 @@ import com.groupe.gestionrecettes.ui.composables.SearchBar
 import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.groupe.gestionrecettes.data.recipes
+import com.groupe.gestionrecettes.data.viewmodel.AuthViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(navController: NavController, authViewModel: AuthViewModel = viewModel()) {
+fun HomeScreen(
+    navController: NavController,
+               authViewModel: AuthViewModel = hiltViewModel()
+) {
     val userDetails by authViewModel.userDetails.collectAsState()
-    val isLoggedIn by remember { derivedStateOf { userDetails != null } }
+    val isLoggedIn = userDetails != null
 
     ScrontchTheme {
         Surface(
@@ -93,6 +98,7 @@ fun HomeScreen(navController: NavController, authViewModel: AuthViewModel = view
             }
         }
     }
+    println("User details: $userDetails")
 }
 
 @Composable
@@ -104,12 +110,3 @@ fun SectionTitle(title: String) {
     )
 }
 
-@Preview(showBackground = true)
-@Composable
-fun RecipeCarouselPreview() {
-    val navController = rememberNavController()
-    val authViewModel = AuthViewModel(application = Application())
-    ScrontchTheme {
-        HomeScreen(navController, authViewModel)
-    }
-}
