@@ -1,8 +1,5 @@
 package com.groupe.gestionrecettes.data
 
-import OldIngredientCategory
-import oldIngredientCategories
-
 data class OldIngredient(
     val id: Int,
     val name: String,

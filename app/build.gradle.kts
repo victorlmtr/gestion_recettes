@@ -96,6 +96,8 @@ dependencies {
     implementation ("com.google.dagger:hilt-android:2.48.1")
     kapt("com.google.dagger:hilt-android-compiler:2.48.1")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation("androidx.compose.ui:ui-text-google-fonts:1.6.8")
+
 }
 
 kapt {
