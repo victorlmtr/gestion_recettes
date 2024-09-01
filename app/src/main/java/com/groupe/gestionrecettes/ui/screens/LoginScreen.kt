@@ -26,8 +26,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.groupe.gestionrecettes.data.Screens
 
 @Composable
-fun LoginScreen(navController: NavController) {
-    val authViewModel: AuthViewModel = viewModel()
+fun LoginScreen(navController: NavController, authViewModel: AuthViewModel = viewModel()) {
     val userName = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
     val loginState by authViewModel.loginState.collectAsState()
@@ -48,7 +47,7 @@ fun LoginScreen(navController: NavController) {
                     contentDescription = "Login picture"
                 )
                 Text(
-                    text = "Bienvenue !",
+                    text = "Bienvenue !",
                     style = MaterialTheme.typography.titleLarge.copy(
                         color = MaterialTheme.colorScheme.primary
                     ),
@@ -69,13 +68,13 @@ fun LoginScreen(navController: NavController) {
 
                 when (loginState) {
                     is AuthViewModel.LoginState.Loading -> {
-                        Text(text = "Chargement...")
+                        Text(text = "Chargement…")
                     }
                     is AuthViewModel.LoginState.Success -> {
-                        navController.navigate(Screens.Profile.route)
+                        navController.navigate(Screens.Home.route)
                     }
                     is AuthViewModel.LoginState.Error -> {
-                        Text(text = "Erreur : ${(loginState as AuthViewModel.LoginState.Error).message}")
+                        Text(text = "Erreur : ${(loginState as AuthViewModel.LoginState.Error).message}")
                     }
                     else -> Unit
                 }

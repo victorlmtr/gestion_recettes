@@ -1,11 +1,16 @@
 package com.groupe.gestionrecettes.ui.theme
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.Typography
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 
 private val lightScheme = lightColorScheme(
     primary = primaryLight,
@@ -263,9 +268,22 @@ val unspecified_scheme = ColorFamily(
     Color.Unspecified, Color.Unspecified, Color.Unspecified, Color.Unspecified
 )
 
+val fontProvider = FontProvider()
+
+val CustomTypography = Typography(
+    // Define your typography styles here
+    titleLarge = TextStyle(
+        fontFamily = fontProvider.fontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 40.sp
+    )
+    // Add other typography styles if needed
+)
+
+
 @Composable
 fun ScrontchTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    darkTheme: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = if (darkTheme) {
@@ -273,10 +291,9 @@ fun ScrontchTheme(
     } else {
         lightScheme
     }
-
     MaterialTheme(
         colorScheme = colorScheme,
-        shapes = Shapes,
+        typography = CustomTypography,
         content = content
     )
 }

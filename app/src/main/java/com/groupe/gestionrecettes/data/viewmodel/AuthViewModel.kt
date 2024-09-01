@@ -45,6 +45,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                     sessionManager.saveUserDetails(user.id, user.nomUtilisateur)
 
                     _userDetails.value = user
+                    Log.d("AuthViewModel", "User details updated: ${user.nomUtilisateur}") // Log added here
                     _loginState.value = LoginState.Success(user)
                 } else {
                     _loginState.value = LoginState.Error("Invalid login response: missing tokens or user information")
