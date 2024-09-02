@@ -5,8 +5,10 @@ import com.groupe.gestionrecettes.data.model.UserDto
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface AuthApiService {
@@ -15,6 +17,9 @@ interface AuthApiService {
     suspend fun login(
         @Body loginRequest: LoginRequest
     ): LoginResponse
+
+    @GET("/api/utilisateurs/{id}")
+    suspend fun getUser(@Path("id") id: Int): UserDto
 }
 data class LoginRequest(
     val username: String,

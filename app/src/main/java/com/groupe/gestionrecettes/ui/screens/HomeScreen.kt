@@ -1,6 +1,5 @@
 package com.groupe.gestionrecettes.ui.screens
 
-
 import android.app.Application
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -18,18 +17,22 @@ import com.groupe.gestionrecettes.data.Screens
 import com.groupe.gestionrecettes.ui.composables.RecipeCarousel
 import com.groupe.gestionrecettes.ui.composables.SearchBar
 import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.groupe.gestionrecettes.data.recipes
 import com.groupe.gestionrecettes.data.viewmodel.AuthViewModel
+import com.groupe.gestionrecettes.data.viewmodel.RecipeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     navController: NavController,
-               authViewModel: AuthViewModel = hiltViewModel()
+    authViewModel: AuthViewModel = hiltViewModel(),
+    recipeViewModel: RecipeViewModel = hiltViewModel()
 ) {
     val userDetails by authViewModel.userDetails.collectAsState()
     val isLoggedIn = userDetails != null
+
+    val recipes by recipeViewModel.recipes.collectAsState()
+    val loading by recipeViewModel.loading.collectAsState()
+    val error by recipeViewModel.error.collectAsState()
 
     ScrontchTheme {
         Surface(
@@ -41,15 +44,18 @@ fun HomeScreen(
             ) {
                 item {
                     TopAppBar(
-                        title = { Text(fontFamily = MaterialTheme.typography.titleLarge.fontFamily,
-                            text = "Scrontch") },
+                        title = { Text(fontFamily = MaterialTheme.typography.titleLarge.fontFamily, text = "Scrontch") },
                         actions = {
-                            IconButton(onClick = {
-                                navController.navigate(Screens.Login.route)
-                            }) {
+                            IconButton(
+                                onClick = {
+                                    navController.navigate(Screens.Login.route)
+                                },
+                                modifier = Modifier.size(36.dp)
+                            ) {
                                 Icon(
                                     imageVector = Icons.Default.Person,
-                                    contentDescription = "Profile Icon"
+                                    contentDescription = "Profile Icon",
+                                    modifier = Modifier.size(36.dp)
                                 )
                             }
                         }
@@ -65,35 +71,43 @@ fun HomeScreen(
                             "Bonjour !\nQu'allez-vous cuisiner aujourd'hui ?"
                         },
                         style = MaterialTheme.typography.titleMedium,
-                        modifier = Modifier.run {
-                            padding(8.dp)
-                                                .fillMaxWidth()
-                        }
+                        modifier = Modifier.padding(8.dp).fillMaxWidth()
                     )
                 }
 
                 item {
-                    Column(modifier = Modifier.padding(horizontal = 16.dp)) {
-                        SearchBar()
-                    }
+                    SearchBar()
+                    Spacer(modifier = Modifier.height(0.dp))
                 }
 
-                // Recipe Sections
-                item {
-                    SectionTitle(title = "Ça pourrait vous plaire")
-                    RecipeCarousel(navController = navController, recipes = recipes)
-                }
-                item {
-                    SectionTitle(title = "Végétarien")
-                    RecipeCarousel(navController = navController, recipes = recipes)
-                }
-                item {
-                    SectionTitle(title = "Postés récemment")
-                    RecipeCarousel(navController = navController, recipes = recipes)
-                }
-                item {
-                    SectionTitle(title = "Les plus likés")
-                    RecipeCarousel(navController = navController, recipes = recipes)
+                // Show loading or error message
+                when {
+                    loading -> item {
+                        CircularProgressIndicator(modifier = Modifier.padding(16.dp))
+                    }
+                    error != null -> item {
+                        Text(
+                            text = "Error: $error",
+                            color = MaterialTheme.colorScheme.error,
+                            modifier = Modifier.padding(16.dp)
+                        )
+                    }
+                    else -> {
+                        // Recipe Sections dynamically created
+                        val recipeCategories = listOf(
+                            "Ça pourrait vous plaire" to recipes.shuffled(),
+     //                       "Végétarien" to recipes.filter { it.type?.libType == "Végétarien" },
+                            "Postés récemment" to recipes.sortedByDescending { it.datePublished },
+                            "Les plus likés" to recipes.sortedByDescending { it.difficultyRating }
+                        )
+
+                        recipeCategories.forEach { (title, recipeList) ->
+                            item {
+                                SectionTitle(title = title)
+                                RecipeCarousel(navController = navController, recipes = recipeList)
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -109,4 +123,3 @@ fun SectionTitle(title: String) {
         modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp)
     )
 }
-

@@ -1,43 +1,34 @@
 package com.groupe.gestionrecettes.ui.composables
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.groupe.gestionrecettes.R
+import androidx.compose.ui.graphics.painter.BitmapPainter
 import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
+import java.io.ByteArrayInputStream
+import android.graphics.BitmapFactory
 
 @Composable
 fun RecipeBigCard(
     recipeName: String,
-    @DrawableRes imageRes: Int,
+    imageRes: ByteArray?,
     chipLabel1: String,
     chipLabel2: String,
-    chipIcon1: Int,
+    chipIcon1: ByteArray,
     recipeLength: String,
     userCount: Int,
     rating: Float,
@@ -55,8 +46,9 @@ fun RecipeBigCard(
             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
         ) {
             Column(
-                modifier = Modifier.fillMaxSize().clickable(onClick = onClick),
-
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clickable(onClick = onClick),
                 verticalArrangement = Arrangement.SpaceEvenly
             ) {
                 Box(
@@ -64,14 +56,17 @@ fun RecipeBigCard(
                         .fillMaxWidth()
                         .height(160.dp)  // Increased image height
                 ) {
-                    Image(
-                        painter = painterResource(id = imageRes),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
-                    )
+                    imageRes?.let { byteArray ->
+                        val bitmap = remember { byteArray.toBitmap() }
+                        Image(
+                            painter = BitmapPainter(bitmap.asImageBitmap()),
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
+                        )
+                    }
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -105,7 +100,7 @@ fun RecipeBigCard(
                     }
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceAround,
+                        horizontalArrangement = Arrangement.SpaceEvenly,
                     ) {
                         UnselectableChipIcon(
                             label = chipLabel1,
@@ -128,16 +123,24 @@ fun RecipeBigCard(
     }
 }
 
+fun ByteArray.toBitmap(): android.graphics.Bitmap {
+    return BitmapFactory.decodeStream(ByteArrayInputStream(this))
+}
+
 @Preview(showBackground = true)
 @Composable
 fun RecipeBigCardPreview() {
     ScrontchTheme {
+        // Example preview data. Replace with actual byte arrays as needed.
+        val dummyImageRes = ByteArray(0)  // Replace with actual image byte array
+        val dummyIconRes = ByteArray(0)  // Replace with actual icon byte array
+
         RecipeBigCard(
             recipeName = "Carbonade flamande",
-            imageRes = R.drawable.carbonade2,
+            imageRes = dummyImageRes,
             chipLabel1 = "Végétarien",
             chipLabel2 = "Bosnie-Herzégovine",
-            chipIcon1 = R.drawable.beef,
+            chipIcon1 = dummyIconRes,
             recipeLength = "1 h 30",
             userCount = 100,
             rating = 4.5f,

@@ -23,14 +23,14 @@ fun RecipeSmallCardClickable(recipe: Recipe, onClick: () -> Unit) {
     ) {
         RecipeSmallCard(
             recipeName = recipe.name,
-            imageRes = recipe.imageRes,
-            chipLabel1 = recipe.category,
-            chipLabel2 = recipe.country,
-            chipIcon1 = recipe.categoryIcon,
-            recipeLength = recipe.length,
-            userCount = recipe.userCount,
-            rating = recipe.rating,
-            badgeCount = recipe.badgeCount
+            imageRes = recipe.image,
+            chipLabel1 = recipe.type.libType,
+            chipLabel2 = recipe.country.libPays,
+            chipIcon1 = recipe.type.iconeType,
+            recipeLength = recipe.totalTime,
+            userCount = 4,
+            rating = 2.5f,
+            badgeCount = 4
         )
     }
 }

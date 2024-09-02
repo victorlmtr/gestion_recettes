@@ -1,5 +1,5 @@
 package com.groupe.gestionrecettes.ui.composables
-import androidx.annotation.DrawableRes
+
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -13,18 +13,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.FilterChipDefaults
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.tooling.preview.Preview
-import com.groupe.gestionrecettes.R
 import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
+import java.io.ByteArrayInputStream
+import android.graphics.BitmapFactory
+import androidx.compose.ui.graphics.asImageBitmap
 
 @Composable
 fun SelectableChipIcon(
     label: String,
-    @DrawableRes iconRes: Int,
+    iconRes: ByteArray,
     selected: Boolean,
     onSelectedChange: (Boolean) -> Unit
 ) {
+    // Convert ByteArray to Bitmap and then to ImageBitmap
+    val bitmap = BitmapFactory.decodeStream(ByteArrayInputStream(iconRes))
+    val imageBitmap = bitmap?.asImageBitmap()
+
     FilterChip(
         selected = selected,
         onClick = { onSelectedChange(!selected) },
@@ -38,12 +44,14 @@ fun SelectableChipIcon(
                 )
             }
         } else {
-            {
-                Icon(
-                    painter = painterResource(id = iconRes),
-                    contentDescription = label,
-                    modifier = Modifier.size(FilterChipDefaults.IconSize)
-                )
+            imageBitmap?.let {
+                {
+                    Icon(
+                        painter = BitmapPainter(it),
+                        contentDescription = label,
+                        modifier = Modifier.size(FilterChipDefaults.IconSize)
+                    )
+                }
             }
         }
     )
@@ -54,10 +62,15 @@ fun SelectableChipIcon(
 fun FilterChipIconPreview() {
     ScrontchTheme {
         var isVegetableChipSelected by remember { mutableStateOf(false) }
+
+        // Example preview data. Replace with actual byte arrays as needed.
+        val dummyIconRes = ByteArray(0)  // Replace with actual icon byte array
+
         SelectableChipIcon(
             label = "Légumes",
-            iconRes = R.drawable.vegetables,
+            iconRes = dummyIconRes,
             selected = isVegetableChipSelected,
             onSelectedChange = { isVegetableChipSelected = it }
-        ) }
+        )
+    }
 }

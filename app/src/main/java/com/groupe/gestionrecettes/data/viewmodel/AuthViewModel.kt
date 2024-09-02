@@ -33,6 +33,14 @@ class AuthViewModel @Inject constructor(
         data class Error(val message: String) : LoginState()
     }
 
+    init {
+        // Check if user details are saved in session and load them
+        val savedUser = sessionManager.fetchUserDetails()
+        if (savedUser != null) {
+            _userDetails.value = savedUser
+        }
+    }
+
     private val _loginState = MutableStateFlow<LoginState>(LoginState.Idle)
     val loginState: StateFlow<LoginState> = _loginState
 
@@ -49,7 +57,7 @@ class AuthViewModel @Inject constructor(
 
                 if (accessToken != null && refreshToken != null && user != null) {
                     sessionManager.saveAuthToken(accessToken, refreshToken)
-                    sessionManager.saveUserDetails(user.id, user.nomUtilisateur)
+                    sessionManager.saveUserDetails(user)
 
                     _userDetails.value = user
                     Log.d("AuthViewModel", "User details updated: ${user.nomUtilisateur}")

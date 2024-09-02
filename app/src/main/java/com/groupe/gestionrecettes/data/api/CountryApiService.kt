@@ -2,7 +2,7 @@ package com.groupe.gestionrecettes.data.api
 
 import retrofit2.http.GET
 
-interface CountryApi {
+interface CountryApiService {
     @GET("/api/countries")
     suspend fun getCountries(): List<Country>
 }

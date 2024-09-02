@@ -44,7 +44,7 @@ fun MainNavigationContent(navController: NavHostController = rememberNavControll
             composable(Screens.Login.route) { LoginScreen(navController) }
             composable(Screens.RecipeDetails.route) { backStackEntry ->
                 val recipeId = backStackEntry.arguments?.getString("recipeId")?.toIntOrNull()
-                RecipeDetailsScreen(navController, recipeId, {})
+                RecipeDetailsScreen(navController, recipeId, recipeViewModel = hiltViewModel())
             }
             composable(Screens.RecipeStep.route) { backStackEntry ->
                 val recipeId = backStackEntry.arguments?.getString("recipeId")?.toIntOrNull()
