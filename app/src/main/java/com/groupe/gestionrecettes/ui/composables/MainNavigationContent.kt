@@ -7,13 +7,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.groupe.gestionrecettes.data.Screens
+import com.groupe.gestionrecettes.data.model.Screens
 import com.groupe.gestionrecettes.data.viewmodel.IngredientViewModel
 import com.groupe.gestionrecettes.ui.screens.*
 
@@ -44,7 +43,9 @@ fun MainNavigationContent(navController: NavHostController = rememberNavControll
             composable(Screens.Login.route) { LoginScreen(navController) }
             composable(Screens.RecipeDetails.route) { backStackEntry ->
                 val recipeId = backStackEntry.arguments?.getString("recipeId")?.toIntOrNull()
-                RecipeDetailsScreen(navController, recipeId, recipeViewModel = hiltViewModel())
+                if (recipeId != null) {
+                    RecipeDetailsScreen(navController, recipeId, recipeViewModel = hiltViewModel())
+                }
             }
             composable(Screens.RecipeStep.route) { backStackEntry ->
                 val recipeId = backStackEntry.arguments?.getString("recipeId")?.toIntOrNull()

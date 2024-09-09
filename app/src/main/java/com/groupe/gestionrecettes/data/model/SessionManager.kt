@@ -1,9 +1,8 @@
-package com.groupe.gestionrecettes.data
+package com.groupe.gestionrecettes.data.model
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
-import com.groupe.gestionrecettes.data.model.UserDto
 
 class SessionManager(context: Context) {
     private val prefs: SharedPreferences = context.getSharedPreferences("user_session", Context.MODE_PRIVATE)

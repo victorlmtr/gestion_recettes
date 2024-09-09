@@ -22,7 +22,7 @@ import com.groupe.gestionrecettes.ui.composables.CtaButton
 import com.groupe.gestionrecettes.ui.composables.PasswordTextField
 import com.groupe.gestionrecettes.ui.composables.UserNameTextField
 import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
-import com.groupe.gestionrecettes.data.Screens
+import com.groupe.gestionrecettes.data.model.Screens
 import com.groupe.gestionrecettes.data.viewmodel.AuthViewModel
 
 @Composable

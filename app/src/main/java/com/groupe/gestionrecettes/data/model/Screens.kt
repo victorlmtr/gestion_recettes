@@ -1,4 +1,4 @@
-package com.groupe.gestionrecettes.data
+package com.groupe.gestionrecettes.data.model
 
 sealed class Screens(val route : String) {
     object Home : Screens("home_screen")

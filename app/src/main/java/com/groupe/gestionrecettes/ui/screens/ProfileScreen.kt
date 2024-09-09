@@ -14,12 +14,11 @@ import androidx.compose.material.icons.automirrored.filled.Comment
 import androidx.compose.material.icons.filled.*
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import com.groupe.gestionrecettes.data.ProfileItem
-import com.groupe.gestionrecettes.data.ToggleProfileItem
+import com.groupe.gestionrecettes.data.model.ProfileItem
+import com.groupe.gestionrecettes.data.model.ToggleProfileItem
 import com.groupe.gestionrecettes.ui.composables.ProfileSection
-import com.groupe.gestionrecettes.ui.composables.ToggleProfileItemView
 import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
-import com.groupe.gestionrecettes.data.Screens
+import com.groupe.gestionrecettes.data.model.Screens
 
 @Composable
 fun ProfileScreen(navController: NavController) {

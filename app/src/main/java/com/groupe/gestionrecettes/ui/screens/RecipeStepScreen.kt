@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.groupe.gestionrecettes.data.Screens
+import com.groupe.gestionrecettes.data.model.Screens
 import com.groupe.gestionrecettes.data.viewmodel.RecipeViewModel
 import com.groupe.gestionrecettes.ui.composables.SurveyBottomBar
 import com.groupe.gestionrecettes.ui.composables.SurveyTopAppBar
@@ -32,7 +32,6 @@ fun RecipeStepScreen(
         recipeViewModel.getRecipeById(recipeId)
     }
 
-    val recipeState by recipeViewModel.recipeDetails.collectAsState()
     val loading by recipeViewModel.loading.collectAsState()
     val error by recipeViewModel.error.collectAsState()
 
@@ -63,10 +62,9 @@ fun RecipeStepScreen(
                 }
             } else {
                 // Create a local variable for recipeState to allow smart cast
-                val recipe = recipeState
-                if (recipe != null) {
+                if (error != null) {
                     // Get the specific step details
-                    val step = stepIndex?.let { recipe.steps.getOrNull(it) }
+                    val step = stepIndex?.let { }
 
                     if (step == null) {
                         // Handle missing step
@@ -84,14 +82,14 @@ fun RecipeStepScreen(
                             )
                         }
                     } else {
-                        val isLastStep = stepIndex == recipe.steps.lastIndex
+                        val isLastStep = stepIndex == 4
 
                         Scaffold(
                             topBar = {
                                 SurveyTopAppBar(
                                     questionIndex = stepIndex + 1,
-                                    totalQuestionsCount = recipe.steps.size,
-                                    stepName = recipe.name,
+                                    totalQuestionsCount = 4,
+                                    stepName = "test",
                                     onClosePressed = {
                                         navController.navigate(Screens.Recipes.route)
                                     }
@@ -105,7 +103,7 @@ fun RecipeStepScreen(
                                         .padding(16.dp)
                                 ) {
                                     Text(
-                                        text = step.instructions,
+                                        text = "test",
                                         style = MaterialTheme.typography.bodyMedium
                                     )
                                 }

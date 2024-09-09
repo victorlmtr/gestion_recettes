@@ -9,8 +9,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.groupe.gestionrecettes.R
-import com.groupe.gestionrecettes.data.Screens
+import com.groupe.gestionrecettes.data.model.Screens
 import com.groupe.gestionrecettes.ui.composables.RecipeSmallCardClickable
 import com.groupe.gestionrecettes.ui.composables.SearchBar
 import com.groupe.gestionrecettes.ui.composables.SelectableChip

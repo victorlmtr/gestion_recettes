@@ -2,10 +2,9 @@ package com.groupe.gestionrecettes.data.viewmodel
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.groupe.gestionrecettes.data.SessionManager
+import com.groupe.gestionrecettes.data.model.SessionManager
 import com.groupe.gestionrecettes.data.api.AuthApiService
 import com.groupe.gestionrecettes.data.api.LoginRequest
 import com.groupe.gestionrecettes.data.api.LoginResponse

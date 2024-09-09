@@ -12,20 +12,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.graphics.painter.BitmapPainter
+import coil.compose.rememberAsyncImagePainter
 import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
-import java.io.ByteArrayInputStream
-import android.graphics.BitmapFactory
 
 @Composable
 fun RecipeBigCard(
     recipeName: String,
-    imageRes: ByteArray?,
+    imageRes: String?,
     chipLabel1: String,
     chipLabel2: String,
     chipIcon1: ByteArray,
@@ -54,12 +52,12 @@ fun RecipeBigCard(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(160.dp)  // Increased image height
+                        .height(160.dp)
                 ) {
-                    imageRes?.let { byteArray ->
-                        val bitmap = remember { byteArray.toBitmap() }
+                    imageRes?.let { url ->
+                        val painter = rememberAsyncImagePainter(url)
                         Image(
-                            painter = BitmapPainter(bitmap.asImageBitmap()),
+                            painter = painter,
                             contentDescription = null,
                             contentScale = ContentScale.Crop,
                             modifier = Modifier
@@ -88,7 +86,7 @@ fun RecipeBigCard(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 8.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)  // Evenly space elements vertically
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -123,29 +121,21 @@ fun RecipeBigCard(
     }
 }
 
-fun ByteArray.toBitmap(): android.graphics.Bitmap {
-    return BitmapFactory.decodeStream(ByteArrayInputStream(this))
-}
-
 @Preview(showBackground = true)
 @Composable
 fun RecipeBigCardPreview() {
     ScrontchTheme {
-        // Example preview data. Replace with actual byte arrays as needed.
-        val dummyImageRes = ByteArray(0)  // Replace with actual image byte array
-        val dummyIconRes = ByteArray(0)  // Replace with actual icon byte array
-
         RecipeBigCard(
             recipeName = "Carbonade flamande",
-            imageRes = dummyImageRes,
+            imageRes = "https://images.victorl.xyz/recipe1.jpg",
             chipLabel1 = "Végétarien",
             chipLabel2 = "Bosnie-Herzégovine",
-            chipIcon1 = dummyIconRes,
+            chipIcon1 = ByteArray(0),
             recipeLength = "1 h 30",
             userCount = 100,
             rating = 4.5f,
             badgeCount = 4,
-            onClick =  {}
+            onClick = {}
         )
     }
 }
