@@ -1,4 +1,4 @@
-package com.groupe.gestionrecettes.data
+package com.groupe.gestionrecettes.data.model
 
 import com.groupe.gestionrecettes.R
 

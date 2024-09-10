@@ -16,7 +16,7 @@ class IngredientRepository {
     suspend fun getCategoryIcon(categoryId: Int): String? {
         val response = categoryApi.getIcon(categoryId)
         return if (response.isSuccessful) {
-            "http://192.168.1.21:8081/api/ingredient-categories/$categoryId/icon"
+            "http://victorl.xyz:8081/api/ingredient-categories/$categoryId/icon"
         } else {
             null
         }

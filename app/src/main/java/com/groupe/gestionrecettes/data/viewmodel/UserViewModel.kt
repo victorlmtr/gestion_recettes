@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.groupe.gestionrecettes.data.SessionManager
+import com.groupe.gestionrecettes.data.model.SessionManager
 import com.groupe.gestionrecettes.data.api.RetrofitInstance
 import com.groupe.gestionrecettes.data.api.UserApiService
 import com.groupe.gestionrecettes.data.model.GroceryListDto

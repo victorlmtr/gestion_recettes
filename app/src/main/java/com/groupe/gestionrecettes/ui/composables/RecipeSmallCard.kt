@@ -1,6 +1,5 @@
 package com.groupe.gestionrecettes.ui.composables
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,26 +11,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.groupe.gestionrecettes.R
+import coil.compose.rememberAsyncImagePainter
+import coil.compose.rememberImagePainter
 import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
 
 @Composable
 fun RecipeSmallCard(
     recipeName: String,
-    @DrawableRes imageRes: Int,
+    imageRes: String?,
     chipLabel1: String,
     chipLabel2: String,
-    chipIcon1: Int,
+    chipIcon1: ByteArray,
     recipeLength: String,
     userCount: Int,
     rating: Float,
     badgeCount: Int,
     modifier: Modifier = Modifier
-
 ) {
     Box(modifier = modifier.padding(8.dp)) {
         Card(
@@ -76,19 +75,21 @@ fun RecipeSmallCard(
                         UnselectableChip(
                             label = chipLabel2,
                         )
-
                     }
                 }
 
-                Image(
-                    painter = painterResource(id = imageRes),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .aspectRatio(1f)
-                        .clip(RoundedCornerShape(8.dp))
-                )
+                imageRes?.let {
+                    val painter = rememberAsyncImagePainter(it)
+                    Image(
+                        painter = painter,
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .aspectRatio(1f)
+                            .clip(RoundedCornerShape(8.dp))
+                    )
+                }
             }
         }
 
@@ -107,10 +108,10 @@ fun RecipeSmallCardPreview() {
     ScrontchTheme {
         RecipeSmallCard(
             recipeName = "Carbonade flamande",
-            imageRes = R.drawable.carbonade2,
+            imageRes = "https://images.victorl.xyz/recipe1.jpg",
             chipLabel1 = "Végétarien",
             chipLabel2 = "Bosnie-Herzégovine",
-            chipIcon1 = R.drawable.beef,
+            chipIcon1 = ByteArray(0),  // Example empty ByteArray for the preview
             recipeLength = "1 h 30",
             userCount = 100,
             rating = 4.5f,

@@ -1,8 +1,9 @@
-package com.groupe.gestionrecettes.data
+package com.groupe.gestionrecettes.data.model
 
 import android.content.Context
-import com.groupe.gestionrecettes.data.SessionManager
 import com.groupe.gestionrecettes.data.api.AuthApiService
+import com.groupe.gestionrecettes.data.api.RecetteApiService
+import com.groupe.gestionrecettes.data.repository.RecipeRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,6 +13,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -26,7 +28,7 @@ object AppModule {
             .build()
 
         return Retrofit.Builder()
-            .baseUrl("http://192.168.1.21:8081/")
+            .baseUrl("http://victorl.xyz:8081/")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -40,5 +42,17 @@ object AppModule {
     @Provides
     fun provideSessionManager(@ApplicationContext context: Context): SessionManager {
         return SessionManager(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRecetteApiService(retrofit: Retrofit): RecetteApiService {
+        return retrofit.create(RecetteApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRecipeRepository(apiService: RecetteApiService): RecipeRepository {
+        return RecipeRepository(apiService)
     }
 }

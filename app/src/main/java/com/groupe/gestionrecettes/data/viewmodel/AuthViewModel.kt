@@ -2,10 +2,9 @@ package com.groupe.gestionrecettes.data.viewmodel
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.groupe.gestionrecettes.data.SessionManager
+import com.groupe.gestionrecettes.data.model.SessionManager
 import com.groupe.gestionrecettes.data.api.AuthApiService
 import com.groupe.gestionrecettes.data.api.LoginRequest
 import com.groupe.gestionrecettes.data.api.LoginResponse
@@ -33,6 +32,14 @@ class AuthViewModel @Inject constructor(
         data class Error(val message: String) : LoginState()
     }
 
+    init {
+        // Check if user details are saved in session and load them
+        val savedUser = sessionManager.fetchUserDetails()
+        if (savedUser != null) {
+            _userDetails.value = savedUser
+        }
+    }
+
     private val _loginState = MutableStateFlow<LoginState>(LoginState.Idle)
     val loginState: StateFlow<LoginState> = _loginState
 
@@ -49,7 +56,7 @@ class AuthViewModel @Inject constructor(
 
                 if (accessToken != null && refreshToken != null && user != null) {
                     sessionManager.saveAuthToken(accessToken, refreshToken)
-                    sessionManager.saveUserDetails(user.id, user.nomUtilisateur)
+                    sessionManager.saveUserDetails(user)
 
                     _userDetails.value = user
                     Log.d("AuthViewModel", "User details updated: ${user.nomUtilisateur}")

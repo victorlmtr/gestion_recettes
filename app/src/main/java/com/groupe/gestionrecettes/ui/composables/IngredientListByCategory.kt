@@ -71,7 +71,7 @@ fun IngredientListByCategoryPreview() {
     val category = IngredientCategory(
         id = 1,
         libCategorieIngredient = "Légumes",
-        iconeCategorieIngredient = "http://10.0.2.2:8081/api/ingredient-categories/1/icon"
+        iconeCategorieIngredient = "http://victorl.xyz:8081/api/ingredient-categories/1/icon"
     )
     val ingredients = listOf(
         Ingredient(id = 1, libIngredient = "Ail", categorieIngredient = category),

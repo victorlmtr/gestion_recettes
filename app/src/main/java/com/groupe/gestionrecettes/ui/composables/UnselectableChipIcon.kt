@@ -1,6 +1,5 @@
 package com.groupe.gestionrecettes.ui.composables
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -19,16 +18,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.groupe.gestionrecettes.R
 import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
+import java.io.ByteArrayInputStream
+import android.graphics.BitmapFactory
+import androidx.compose.ui.graphics.asImageBitmap
 
 @Composable
 fun UnselectableChipIcon(
     label: String,
-    @DrawableRes iconRes: Int,
+    iconRes: ByteArray,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -48,12 +49,20 @@ fun UnselectableChipIcon(
             )
             .padding(horizontal = 8.dp, vertical = 6.dp)
     ) {
-        Icon(
-            painter = painterResource(id = iconRes),
-            contentDescription = label,
-            modifier = Modifier.size(14.dp),
-            tint = MaterialTheme.colorScheme.primary
-        )
+        // Convert ByteArray to Bitmap and then to ImageBitmap
+        val bitmap = BitmapFactory.decodeStream(ByteArrayInputStream(iconRes))
+        val imageBitmap = bitmap?.asImageBitmap()
+
+        // Use ImageBitmap in the Icon painter
+        imageBitmap?.let {
+            Icon(
+                painter = BitmapPainter(it),
+                contentDescription = label,
+                modifier = Modifier.size(14.dp),
+                tint = MaterialTheme.colorScheme.primary
+            )
+        }
+
         Text(
             text = label,
             style = MaterialTheme.typography.labelMedium,
@@ -66,7 +75,10 @@ fun UnselectableChipIcon(
 @Composable
 fun UnselectableChipIconPreview() {
     ScrontchTheme {
-        UnselectableChipIcon(label = "Légumes", iconRes = R.drawable.vegetables)
+        // Example preview data. Replace with actual byte arrays as needed.
+        val dummyIconRes = ByteArray(0)  // Replace with actual icon byte array
+
+        UnselectableChipIcon(label = "Légumes", iconRes = dummyIconRes)
     }
 }
 
@@ -75,10 +87,14 @@ fun UnselectableChipIconPreview() {
 fun FilterChipIcon2Preview() {
     ScrontchTheme {
         var isVegetableChipSelected by remember { mutableStateOf(false) }
+        // Example preview data. Replace with actual byte arrays as needed.
+        val dummyIconRes = ByteArray(0)  // Replace with actual icon byte array
+
         SelectableChipIcon(
             label = "Légumes",
-            iconRes = R.drawable.vegetables,
+            iconRes = dummyIconRes,
             selected = isVegetableChipSelected,
             onSelectedChange = { isVegetableChipSelected = it }
-        ) }
+        )
+    }
 }

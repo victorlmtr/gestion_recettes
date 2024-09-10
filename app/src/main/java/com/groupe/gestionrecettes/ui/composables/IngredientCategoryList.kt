@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
-import com.groupe.gestionrecettes.data.OldIngredientCategory
-import com.groupe.gestionrecettes.data.oldIngredientCategories
+import com.groupe.gestionrecettes.data.model.OldIngredientCategory
+import com.groupe.gestionrecettes.data.model.oldIngredientCategories
 @Composable
 fun IngredientCategoryList(categories: List<OldIngredientCategory>) {
     Column(

@@ -1,4 +1,4 @@
-package com.groupe.gestionrecettes.data
+package com.groupe.gestionrecettes.data.model
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
