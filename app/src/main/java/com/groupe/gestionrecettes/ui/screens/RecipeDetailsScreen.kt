@@ -89,7 +89,7 @@ fun RecipeDetailsScreen(
                                 horizontalArrangement = Arrangement.SpaceEvenly
                             ) {
                                 UnselectableChip("Tunisie")
-                                UnselectableChipIcon("Végétarien", ByteArray(0)) // Provide default or empty icon
+                                UnselectableChipIcon("Végétarien", "https://images.victorl.xyz/type1.png") // Provide default or empty icon
                                 UnselectableChip("Afrique du Nord")
                             }
 

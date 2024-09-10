@@ -23,7 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun RecipesScreen(
     navController: NavController,
-    recipeViewModel: RecipeViewModel = hiltViewModel() // Inject RecipeViewModel
+    recipeViewModel: RecipeViewModel = hiltViewModel()
 ) {
     var isTomatoChipSelected by remember { mutableStateOf(false) }
     var isIndiaChipSelected by remember { mutableStateOf(false) }
@@ -58,13 +58,13 @@ fun RecipesScreen(
             )
             SelectableChipIcon(
                 label = "Légumes",
-                iconRes = ByteArray(0),
+                iconRes = "https://images.victorl.xyz/type1.png",
                 selected = isVegetableChipSelected,
                 onSelectedChange = { isVegetableChipSelected = it }
             )
             SelectableChipIcon(
                 label = "Bœuf",
-                iconRes = ByteArray(0),
+                iconRes = "https://images.victorl.xyz/type2.png",
                 selected = isBeefChipSelected,
                 onSelectedChange = { isBeefChipSelected = it }
             )

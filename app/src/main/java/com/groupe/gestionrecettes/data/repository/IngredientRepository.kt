@@ -1,24 +1,20 @@
 package com.groupe.gestionrecettes.data.repository
 
-import com.groupe.gestionrecettes.data.api.RetrofitInstance
+import com.groupe.gestionrecettes.data.api.IngredientApiService
+import com.groupe.gestionrecettes.data.api.IngredientCategoryApiService
+import com.groupe.gestionrecettes.data.model.Ingredient
+import com.groupe.gestionrecettes.data.model.IngredientCategory
 import okhttp3.ResponseBody
+import retrofit2.Response
 
-class IngredientRepository {
-    private val ingredientApi = RetrofitInstance.ingredientApiService
-    private val categoryApi = RetrofitInstance.ingredientCategoryApiService
+open class IngredientRepository(
+    private val ingredientApiService: IngredientApiService,
+    private val ingredientCategoryApiService: IngredientCategoryApiService
+) {
+    suspend fun getIngredients() = ingredientApiService.getIngredients()
 
-    suspend fun getIngredients() = ingredientApi.getIngredients()
+    suspend fun getIngredientsByCategory(categoryId: Int) = ingredientApiService.getIngredientsByCategory(categoryId)
 
-    suspend fun getIngredientsByCategory(categoryId: Int) = ingredientApi.getIngredientsByCategory(categoryId)
+    suspend fun getCategories() = ingredientCategoryApiService.getCategories()
 
-    suspend fun getCategories() = categoryApi.getCategories()
-
-    suspend fun getCategoryIcon(categoryId: Int): String? {
-        val response = categoryApi.getIcon(categoryId)
-        return if (response.isSuccessful) {
-            "http://victorl.xyz:8081/api/ingredient-categories/$categoryId/icon"
-        } else {
-            null
-        }
-    }
 }

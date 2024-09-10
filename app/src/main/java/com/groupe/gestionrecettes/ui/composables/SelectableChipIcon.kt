@@ -13,23 +13,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.FilterChipDefaults
-import androidx.compose.ui.graphics.painter.BitmapPainter
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.tooling.preview.Preview
+import coil.compose.rememberAsyncImagePainter
 import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
-import java.io.ByteArrayInputStream
-import android.graphics.BitmapFactory
-import androidx.compose.ui.graphics.asImageBitmap
 
 @Composable
 fun SelectableChipIcon(
     label: String,
-    iconRes: ByteArray,
+    iconRes: String,
     selected: Boolean,
     onSelectedChange: (Boolean) -> Unit
 ) {
-    // Convert ByteArray to Bitmap and then to ImageBitmap
-    val bitmap = BitmapFactory.decodeStream(ByteArrayInputStream(iconRes))
-    val imageBitmap = bitmap?.asImageBitmap()
+    val painter: Painter = rememberAsyncImagePainter(model = iconRes)
 
     FilterChip(
         selected = selected,
@@ -44,14 +40,12 @@ fun SelectableChipIcon(
                 )
             }
         } else {
-            imageBitmap?.let {
-                {
-                    Icon(
-                        painter = BitmapPainter(it),
-                        contentDescription = label,
-                        modifier = Modifier.size(FilterChipDefaults.IconSize)
-                    )
-                }
+            {
+                Icon(
+                    painter = painter,
+                    contentDescription = label,
+                    modifier = Modifier.size(FilterChipDefaults.IconSize)
+                )
             }
         }
     )
@@ -62,9 +56,7 @@ fun SelectableChipIcon(
 fun FilterChipIconPreview() {
     ScrontchTheme {
         var isVegetableChipSelected by remember { mutableStateOf(false) }
-
-        // Example preview data. Replace with actual byte arrays as needed.
-        val dummyIconRes = ByteArray(0)  // Replace with actual icon byte array
+        val dummyIconRes = "https://images.victorl.xyz/type1.jpg"
 
         SelectableChipIcon(
             label = "Légumes",

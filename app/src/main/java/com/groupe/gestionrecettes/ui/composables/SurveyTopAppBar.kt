@@ -82,10 +82,10 @@ fun SurveyTopAppBar(
 
         val animatedProgress by animateFloatAsState(
             targetValue = (questionIndex + 1) / totalQuestionsCount.toFloat(),
-            animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
+            animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec, label = ""
         )
         LinearProgressIndicator(
-            progress = animatedProgress,
+            progress = { animatedProgress },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 0.dp),

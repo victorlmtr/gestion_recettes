@@ -11,12 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import coil.compose.rememberImagePainter
 import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
 
 @Composable
@@ -25,7 +23,7 @@ fun RecipeSmallCard(
     imageRes: String?,
     chipLabel1: String,
     chipLabel2: String,
-    chipIcon1: ByteArray,
+    chipIcon1: String,
     recipeLength: String,
     userCount: Int,
     rating: Float,
@@ -111,7 +109,7 @@ fun RecipeSmallCardPreview() {
             imageRes = "https://images.victorl.xyz/recipe1.jpg",
             chipLabel1 = "Végétarien",
             chipLabel2 = "Bosnie-Herzégovine",
-            chipIcon1 = ByteArray(0),  // Example empty ByteArray for the preview
+            chipIcon1 = "https://images.victorl.xyz/type1.jpg",
             recipeLength = "1 h 30",
             userCount = 100,
             rating = 4.5f,

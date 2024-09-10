@@ -1,9 +1,8 @@
 package com.groupe.gestionrecettes.data.model
 
 import android.content.Context
-import com.groupe.gestionrecettes.data.api.AuthApiService
-import com.groupe.gestionrecettes.data.api.RecetteApiService
-import com.groupe.gestionrecettes.data.repository.RecipeRepository
+import com.groupe.gestionrecettes.data.api.*
+import com.groupe.gestionrecettes.data.repository.IngredientRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,7 +17,11 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    private const val BASE_URL = "http://victorl.xyz:8081/"
+
     @Provides
+    @Singleton
     fun provideRetrofit(): Retrofit {
         val logging = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
@@ -28,20 +31,10 @@ object AppModule {
             .build()
 
         return Retrofit.Builder()
-            .baseUrl("http://victorl.xyz:8081/")
+            .baseUrl(BASE_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-    }
-
-    @Provides
-    fun provideAuthApiService(retrofit: Retrofit): AuthApiService {
-        return retrofit.create(AuthApiService::class.java)
-    }
-
-    @Provides
-    fun provideSessionManager(@ApplicationContext context: Context): SessionManager {
-        return SessionManager(context)
     }
 
     @Provides
@@ -52,7 +45,58 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRecipeRepository(apiService: RecetteApiService): RecipeRepository {
-        return RecipeRepository(apiService)
+    fun provideRecipeTypeService(retrofit: Retrofit): RecipeTypeService {
+        return retrofit.create(RecipeTypeService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideIngredientApiService(retrofit: Retrofit): IngredientApiService {
+        return retrofit.create(IngredientApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideIngredientCategoryApiService(retrofit: Retrofit): IngredientCategoryApiService {
+        return retrofit.create(IngredientCategoryApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideIngredientRepository(
+        ingredientApiService: IngredientApiService,
+        ingredientCategoryApiService: IngredientCategoryApiService
+    ): IngredientRepository {
+        return IngredientRepository(ingredientApiService, ingredientCategoryApiService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthApiService(retrofit: Retrofit): AuthApiService {
+        return retrofit.create(AuthApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCountryApiService(retrofit: Retrofit): CountryApiService {
+        return retrofit.create(CountryApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserApiService(retrofit: Retrofit): UserApiService {
+        return retrofit.create(UserApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSessionManager(@ApplicationContext context: Context): SessionManager {
+        return SessionManager(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRecipeDietService(retrofit: Retrofit): RecipeDietService {
+        return retrofit.create(RecipeDietService::class.java)
     }
 }

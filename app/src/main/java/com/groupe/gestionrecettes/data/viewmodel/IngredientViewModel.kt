@@ -5,15 +5,19 @@ import androidx.lifecycle.viewModelScope
 import com.groupe.gestionrecettes.data.model.IngredientCategory
 import com.groupe.gestionrecettes.data.model.Ingredient
 import com.groupe.gestionrecettes.data.repository.IngredientRepository
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import android.util.Log
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class IngredientViewModel : ViewModel() {
-    private val repository = IngredientRepository()
+@HiltViewModel
+class IngredientViewModel @Inject constructor(
+    private val repository: IngredientRepository
+) : ViewModel() {
 
     private val _categoriesWithIngredients =
         MutableStateFlow<Map<IngredientCategory, List<Ingredient>>>(emptyMap())
@@ -27,16 +31,18 @@ class IngredientViewModel : ViewModel() {
     private fun fetchCategoriesWithIngredients() {
         viewModelScope.launch {
             try {
+                // Fetch categories from repository
                 val categories = repository.getCategories().filterNotNull()
-                val updatedCategories = categories.map { category ->
-                    val iconUrl = repository.getCategoryIcon(category.id) ?: ""
-                    category.copy(iconeCategorieIngredient = iconUrl) // Update the icon URL
-                }
 
-                val categoriesWithIngredients = updatedCategories.associateWith { category ->
-                    Log.d("IngredientViewModel", "Fetching ingredients for category: ${category.libCategorieIngredient}")
+                val categoriesWithIngredients = categories.associateWith { category ->
+                    Log.d(
+                        "IngredientViewModel",
+                        "Fetching ingredients for category: ${category.libCategorieIngredient}"
+                    )
                     repository.getIngredientsByCategory(category.id).filterNotNull()
                 }
+
+                // Update the state with the new data
                 _categoriesWithIngredients.update { categoriesWithIngredients }
             } catch (e: Exception) {
                 Log.e("IngredientViewModel", "Error fetching categories and ingredients", e)

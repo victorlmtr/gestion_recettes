@@ -10,6 +10,4 @@ interface IngredientCategoryApiService {
     @GET("/api/ingredient-categories")
     suspend fun getCategories(): List<IngredientCategory>
 
-    @GET("/api/ingredient-categories/{id}/icon")
-    suspend fun getIcon(@Path("id") id: Int): Response<ResponseBody>
 }

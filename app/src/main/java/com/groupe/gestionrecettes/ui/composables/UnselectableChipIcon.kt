@@ -18,20 +18,21 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.BitmapPainter
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
 import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
-import java.io.ByteArrayInputStream
-import android.graphics.BitmapFactory
-import androidx.compose.ui.graphics.asImageBitmap
 
 @Composable
 fun UnselectableChipIcon(
     label: String,
-    iconRes: ByteArray,
+    iconRes: String, // Changed to String
     modifier: Modifier = Modifier
 ) {
+    // Use Coil to load the image from the URL
+    val painter: Painter = rememberAsyncImagePainter(model = iconRes)
+
     Row(
         verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -49,19 +50,12 @@ fun UnselectableChipIcon(
             )
             .padding(horizontal = 8.dp, vertical = 6.dp)
     ) {
-        // Convert ByteArray to Bitmap and then to ImageBitmap
-        val bitmap = BitmapFactory.decodeStream(ByteArrayInputStream(iconRes))
-        val imageBitmap = bitmap?.asImageBitmap()
-
-        // Use ImageBitmap in the Icon painter
-        imageBitmap?.let {
-            Icon(
-                painter = BitmapPainter(it),
-                contentDescription = label,
-                modifier = Modifier.size(14.dp),
-                tint = MaterialTheme.colorScheme.primary
-            )
-        }
+        Icon(
+            painter = painter,
+            contentDescription = label,
+            modifier = Modifier.size(14.dp),
+            tint = MaterialTheme.colorScheme.primary
+        )
 
         Text(
             text = label,
@@ -75,8 +69,8 @@ fun UnselectableChipIcon(
 @Composable
 fun UnselectableChipIconPreview() {
     ScrontchTheme {
-        // Example preview data. Replace with actual byte arrays as needed.
-        val dummyIconRes = ByteArray(0)  // Replace with actual icon byte array
+        // Example preview data. Replace with actual URL as needed.
+        val dummyIconRes = "https://example.com/icon.png"  // Replace with an actual image URL
 
         UnselectableChipIcon(label = "Légumes", iconRes = dummyIconRes)
     }
@@ -87,8 +81,7 @@ fun UnselectableChipIconPreview() {
 fun FilterChipIcon2Preview() {
     ScrontchTheme {
         var isVegetableChipSelected by remember { mutableStateOf(false) }
-        // Example preview data. Replace with actual byte arrays as needed.
-        val dummyIconRes = ByteArray(0)  // Replace with actual icon byte array
+        val dummyIconRes = "https://images.victorl.xyz/type1.png"
 
         SelectableChipIcon(
             label = "Légumes",

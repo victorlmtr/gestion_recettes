@@ -4,20 +4,22 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.groupe.gestionrecettes.data.model.SessionManager
-import com.groupe.gestionrecettes.data.api.RetrofitInstance
 import com.groupe.gestionrecettes.data.api.UserApiService
 import com.groupe.gestionrecettes.data.model.GroceryListDto
 import com.groupe.gestionrecettes.data.model.IngredientDto
+import com.groupe.gestionrecettes.data.model.SessionManager
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class UserViewModel(context: Context) : ViewModel() {
-    private val userApiService: UserApiService = RetrofitInstance.userApiService
-    private val sessionManager = SessionManager(context)
+@HiltViewModel
+class UserViewModel @Inject constructor(
+    private val userApiService: UserApiService,
+    private val sessionManager: SessionManager
+) : ViewModel() {
 
-    // Define MutableStateFlows for groceries and ingredients
     private val _groceryList = MutableStateFlow<List<GroceryListDto>>(emptyList())
     val groceryList: StateFlow<List<GroceryListDto>> = _groceryList
 

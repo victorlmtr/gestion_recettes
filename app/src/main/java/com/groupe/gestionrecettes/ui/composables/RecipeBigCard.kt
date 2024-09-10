@@ -7,12 +7,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,7 +24,7 @@ fun RecipeBigCard(
     imageRes: String?,
     chipLabel1: String,
     chipLabel2: String,
-    chipIcon1: ByteArray,
+    chipIcon1: String,
     recipeLength: String,
     userCount: Int,
     rating: Float,
@@ -130,7 +128,7 @@ fun RecipeBigCardPreview() {
             imageRes = "https://images.victorl.xyz/recipe1.jpg",
             chipLabel1 = "Végétarien",
             chipLabel2 = "Bosnie-Herzégovine",
-            chipIcon1 = ByteArray(0),
+            chipIcon1 = "https://images.victorl.xyz/type1.jpg",
             recipeLength = "1 h 30",
             userCount = 100,
             rating = 4.5f,
