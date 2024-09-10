@@ -27,14 +27,18 @@ class IngredientViewModel @Inject constructor(
     init {
         fetchCategoriesWithIngredients()
     }
-
     private fun fetchCategoriesWithIngredients() {
         viewModelScope.launch {
             try {
                 // Fetch categories from repository
                 val categories = repository.getCategories().filterNotNull()
 
-                val categoriesWithIngredients = categories.associateWith { category ->
+                // Filter out categories with null or empty properties
+                val validCategories = categories.filter {
+                    it.libCategorieIngredient.isNotEmpty() && it.iconeCategorie.isNotEmpty()
+                }
+
+                val categoriesWithIngredients = validCategories.associateWith { category ->
                     Log.d(
                         "IngredientViewModel",
                         "Fetching ingredients for category: ${category.libCategorieIngredient}"
@@ -49,6 +53,7 @@ class IngredientViewModel @Inject constructor(
             }
         }
     }
+
 
     private val _ingredients = MutableStateFlow<List<Ingredient>>(emptyList())
     val ingredients: StateFlow<List<Ingredient>> = _ingredients

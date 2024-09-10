@@ -15,6 +15,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
+import com.groupe.gestionrecettes.data.helpers.formatDurationToFrench
 import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
 
 @Composable
@@ -62,7 +63,7 @@ fun RecipeSmallCard(
                     ) {
                         StarRating(rating = rating, userCount)
                         Spacer(modifier = Modifier.width(4.dp)) // Added space between rating and length
-                        RecipeLength(recipeLength)
+                        RecipeLength(formatDurationToFrench(recipeLength))
                     }
                     Row {
                         UnselectableChipIcon(

@@ -1,7 +1,7 @@
 package com.groupe.gestionrecettes.data.api
 
 import com.groupe.gestionrecettes.data.model.GroceryListDto
-import com.groupe.gestionrecettes.data.model.IngredientDto
+import com.groupe.gestionrecettes.data.model.Ingredient
 import com.groupe.gestionrecettes.data.model.UserDto
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -13,5 +13,5 @@ interface UserApiService {
     suspend fun getUserGroceries(@Header("Authorization") token: String): List<GroceryListDto>
 
     @GET("/api/utilisateurs/{userId}/ingredients")
-    suspend fun getUserIngredients(@Path("userId") userId: Int, @Header("Authorization") token: String): List<IngredientDto>
+    suspend fun getUserIngredients(@Path("userId") userId: Int, @Header("Authorization") token: String): List<Ingredient>
 }

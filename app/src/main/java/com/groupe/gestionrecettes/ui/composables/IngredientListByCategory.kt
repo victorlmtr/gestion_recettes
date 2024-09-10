@@ -28,10 +28,13 @@ fun IngredientListByCategory(category: IngredientCategory, ingredients: List<Ing
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Row(modifier = Modifier.fillMaxWidth()) {
+                // Load the image using Coil
                 Image(
-                    painter = rememberAsyncImagePainter(model = category.iconeCategorieIngredient),
+                    painter = rememberAsyncImagePainter(model = category.iconeCategorie),
                     contentDescription = category.libCategorieIngredient,
-                    modifier = Modifier.size(32.dp).padding(end = 8.dp)
+                    modifier = Modifier
+                        .size(32.dp)
+                        .padding(end = 8.dp)
                 )
                 Text(
                     text = category.libCategorieIngredient,
@@ -71,7 +74,7 @@ fun IngredientListByCategoryPreview() {
     val category = IngredientCategory(
         id = 1,
         libCategorieIngredient = "Légumes",
-        iconeCategorieIngredient = "http://victorl.xyz:8081/api/ingredient-categories/1/icon"
+        iconeCategorie = "https://images.victorl.xyz/category1.png"
     )
     val ingredients = listOf(
         Ingredient(id = 1, libIngredient = "Ail", categorieIngredient = category),

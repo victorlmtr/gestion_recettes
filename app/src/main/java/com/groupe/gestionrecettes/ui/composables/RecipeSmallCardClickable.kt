@@ -22,11 +22,11 @@ fun RecipeSmallCardClickable(recipe: Recipe, onClick: () -> Unit) {
             .padding(0.dp)
     ) {
         RecipeSmallCard(
-            recipeName = recipe.name,
-            imageRes = recipe.image,
-            chipLabel1 = recipe.type.libTypeRecette,
-            chipLabel2 = recipe.country.libPays,
-            chipIcon1 = recipe.type.iconeType,
+            recipeName = recipe.libRecette,
+            imageRes = recipe.imageRecette,
+            chipLabel1 = recipe.idTypeRecette.libTypeRecette,
+            chipLabel2 = recipe.idPays.libPays,
+            chipIcon1 = recipe.idTypeRecette.iconeTypeRecette,
             recipeLength = recipe.totalTime,
             userCount = 4,
             rating = 2.5f,

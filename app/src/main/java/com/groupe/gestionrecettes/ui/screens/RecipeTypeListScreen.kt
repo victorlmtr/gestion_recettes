@@ -8,6 +8,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
@@ -21,7 +22,7 @@ fun RecipeTypeListScreen(viewModel: RecipeTypeViewModel = hiltViewModel()) {
 
     Column(
         modifier = Modifier
-            .padding(16.dp) // Adjust padding as needed
+            .padding(16.dp)
     ) {
         recipeTypes.forEach { recipeType ->
             RecipeTypeItem(recipeType)
@@ -37,15 +38,14 @@ fun RecipeTypeItem(recipeType: RecipeType) {
             .padding(vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Display recipe type icon using Coil to load from URL
-        val painter = rememberAsyncImagePainter(model = recipeType.iconeType)
-
+        val painter = rememberAsyncImagePainter(model = recipeType.iconeTypeRecette)
         Image(
             painter = painter,
             contentDescription = null,
             modifier = Modifier
                 .size(40.dp)
-                .padding(end = 8.dp) // Adjust size as needed
+                .padding(end = 8.dp),
+            contentScale = ContentScale.Crop
         )
 
         // Display recipe type name

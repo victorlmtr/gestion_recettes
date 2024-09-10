@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.groupe.gestionrecettes.data.api.UserApiService
 import com.groupe.gestionrecettes.data.model.GroceryListDto
-import com.groupe.gestionrecettes.data.model.IngredientDto
+import com.groupe.gestionrecettes.data.model.Ingredient
 import com.groupe.gestionrecettes.data.model.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,8 +23,8 @@ class UserViewModel @Inject constructor(
     private val _groceryList = MutableStateFlow<List<GroceryListDto>>(emptyList())
     val groceryList: StateFlow<List<GroceryListDto>> = _groceryList
 
-    private val _ingredients = MutableStateFlow<List<IngredientDto>>(emptyList())
-    val ingredients: StateFlow<List<IngredientDto>> = _ingredients
+    private val _ingredients = MutableStateFlow<List<Ingredient>>(emptyList())
+    val ingredients: StateFlow<List<Ingredient>> = _ingredients
 
     fun fetchUserGroceries() {
         viewModelScope.launch {
