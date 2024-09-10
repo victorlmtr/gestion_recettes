@@ -29,9 +29,9 @@ fun RecipeCarousel(navController: NavController, recipes: List<Recipe>) {
             RecipeBigCard(
                 recipeName = recipes[index].name,
                 imageRes = recipes[index].image,
-                chipLabel1 = recipes[index].type?.libType ?: "Unknown",
-                chipLabel2 = recipes[index].country?.libPays ?: "Unknown",
-                chipIcon1 = recipes[index].type?.iconeType ?: ByteArray(0),
+                chipLabel1 = recipes[index].type.libTypeRecette,
+                chipLabel2 = recipes[index].country.libPays,
+                chipIcon1 = recipes[index].type.iconeType,
                 recipeLength = recipes[index].totalTime,
                 userCount = 3,
                 rating = 2.5f,

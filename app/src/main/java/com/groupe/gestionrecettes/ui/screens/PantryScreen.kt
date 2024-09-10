@@ -14,7 +14,14 @@ import com.groupe.gestionrecettes.ui.composables.ScreenPicker
 import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
 import com.groupe.gestionrecettes.data.viewmodel.IngredientViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.groupe.gestionrecettes.data.api.IngredientApiService
+import com.groupe.gestionrecettes.data.api.IngredientCategoryApiService
+import com.groupe.gestionrecettes.data.model.Ingredient
+import com.groupe.gestionrecettes.data.model.IngredientCategory
+import com.groupe.gestionrecettes.data.repository.IngredientRepository
 import com.groupe.gestionrecettes.ui.composables.SearchBar
+import okhttp3.ResponseBody
+import retrofit2.Response
 
 
 @Composable
@@ -51,6 +58,22 @@ fun PantryScreen(navController: NavController, viewModel: IngredientViewModel = 
 @Composable
 fun PantryScreenPreview() {
     val navController = rememberNavController()
-    val viewModel = IngredientViewModel()
-    PantryScreen(navController, viewModel)
+    // Use a dummy view model or a preview-specific implementation
+    val dummyViewModel = IngredientViewModel(IngredientRepositoryDummy())
+    PantryScreen(navController, dummyViewModel)
+}
+
+// Dummy implementation of IngredientRepository for previews
+class IngredientRepositoryDummy(
+    private val ingredientApiService: IngredientApiService = IngredientApiServiceDummy(),
+    private val ingredientCategoryApiService: IngredientCategoryApiService = IngredientCategoryApiServiceDummy()
+) : IngredientRepository(ingredientApiService, ingredientCategoryApiService)
+
+class IngredientApiServiceDummy : IngredientApiService {
+    override suspend fun getIngredients(): List<Ingredient> = emptyList()
+    override suspend fun getIngredientsByCategory(categoryId: Int): List<Ingredient> = emptyList()
+}
+
+class IngredientCategoryApiServiceDummy : IngredientCategoryApiService {
+    override suspend fun getCategories(): List<IngredientCategory> = emptyList()
 }

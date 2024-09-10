@@ -1,6 +1,6 @@
 package com.groupe.gestionrecettes.ui.screens
 
-import android.util.Log
+import android.app.Application
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
@@ -8,6 +8,7 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -37,68 +38,55 @@ fun HomeScreen(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            Column(modifier = Modifier.fillMaxSize()) {
-                TopAppBar(
-                    title = { Text(fontFamily = MaterialTheme.typography.titleLarge.fontFamily, text = "Scrontch") },
-                    actions = {
-                        IconButton(
-                            onClick = {
-                                navController.navigate(Screens.Login.route)
-                            },
-                            modifier = Modifier.size(36.dp)
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Person,
-                                contentDescription = "Profile Icon",
+            LazyColumn(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                item {
+                    TopAppBar(
+                        title = { Text(fontFamily = MaterialTheme.typography.titleLarge.fontFamily, text = "Scrontch") },
+                        actions = {
+                            IconButton(
+                                onClick = {
+                                    navController.navigate(Screens.Login.route)
+                                },
                                 modifier = Modifier.size(36.dp)
-                            )
-                        }
-                    }
-                )
-
-                Text(
-                    text = if (isLoggedIn) {
-                        "Bonjour ${userDetails?.nomUtilisateur} !\nQu'allez-vous cuisiner aujourd'hui ?"
-                    } else {
-                        "Bonjour !\nQu'allez-vous cuisiner aujourd'hui ?"
-                    },
-                    style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier.padding(8.dp).fillMaxWidth()
-                )
-
-                SearchBar()
-                Spacer(modifier = Modifier.height(8.dp))
-
-                if (loading) {
-                    CircularProgressIndicator(modifier = Modifier.padding(16.dp))
-                } else if (error != null) {
-                    Text(
-                        text = "Error: $error",
-                        color = MaterialTheme.colorScheme.error,
-                        modifier = Modifier.padding(16.dp)
-                    )
-                } else {
-                    val recipeCategories = listOf(
-                        "Ça pourrait vous plaire" to recipes.shuffled(),
-                        "Postés récemment" to recipes.sortedByDescending { it.datePublished },
-                        "Les plus likés" to recipes.sortedByDescending { it.difficultyRating }
-                    )
-
-                    LazyColumn {
-                        recipeCategories.forEach { (title, recipeList) ->
-                            item {
-                                SectionTitle(title = title)
-                                RecipeCarousel(navController = navController, recipes = recipeList)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Person,
+                                    contentDescription = "Profile Icon",
+                                    modifier = Modifier.size(36.dp)
+                                )
                             }
                         }
-                    }
+                    )
+                }
+
+                // Greeting message
+                item {
+                    Text(
+                        text = if (isLoggedIn) {
+                            "Bonjour ${userDetails?.nomUtilisateur} !\nQu'allez-vous cuisiner aujourd'hui ?"
+                        } else {
+                            "Bonjour !\nQu'allez-vous cuisiner aujourd'hui ?"
+                        },
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier.padding(8.dp).fillMaxWidth()
+                    )
+                }
+
+                item {
+                    SearchBar()
+                    Spacer(modifier = Modifier.height(0.dp))
+                }
+                item {
+                    RecipeTypeListScreen()
+                }
                 }
             }
         }
-    }
+
+    println("User details: $userDetails")
 }
-
-
 
 @Composable
 fun SectionTitle(title: String) {
@@ -108,4 +96,3 @@ fun SectionTitle(title: String) {
         modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp)
     )
 }
-

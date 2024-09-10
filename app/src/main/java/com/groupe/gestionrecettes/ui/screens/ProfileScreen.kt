@@ -1,4 +1,3 @@
-// /ui/screens/ProfileScreen.kt
 package com.groupe.gestionrecettes.ui.screens
 
 import androidx.compose.foundation.layout.*
