@@ -12,6 +12,7 @@ import androidx.navigation.NavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
+import com.groupe.gestionrecettes.data.helpers.formatDurationToFrench
 import com.groupe.gestionrecettes.data.model.Recipe
 import com.groupe.gestionrecettes.data.model.Screens
 
@@ -27,12 +28,12 @@ fun RecipeCarousel(navController: NavController, recipes: List<Recipe>) {
     ) {
         items(recipes.size) { index ->
             RecipeBigCard(
-                recipeName = recipes[index].name,
-                imageRes = recipes[index].image,
-                chipLabel1 = recipes[index].type.libTypeRecette,
-                chipLabel2 = recipes[index].country.libPays,
-                chipIcon1 = recipes[index].type.iconeType,
-                recipeLength = recipes[index].totalTime,
+                recipeName = recipes[index].libRecette,
+                imageRes = recipes[index].imageRecette,
+                chipLabel1 = recipes[index].idTypeRecette.libTypeRecette,
+                chipLabel2 = recipes[index].idPays.libPays,
+                chipIcon1 = recipes[index].idTypeRecette.iconeTypeRecette,
+                recipeLength = formatDurationToFrench(recipes[index].totalTime),
                 userCount = 3,
                 rating = 2.5f,
                 badgeCount = 5,
