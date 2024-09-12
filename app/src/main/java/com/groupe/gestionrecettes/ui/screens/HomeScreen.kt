@@ -28,6 +28,7 @@ fun HomeScreen(
 ) {
     val userDetails by authViewModel.userDetails.collectAsState()
     val isLoggedIn = userDetails != null
+    val userId = userDetails?.id
 
     val recipes by recipeViewModel.recipes.collectAsState()
     val loading by recipeViewModel.loading.collectAsState()

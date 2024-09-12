@@ -8,10 +8,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.groupe.gestionrecettes.data.model.Screens
 import com.groupe.gestionrecettes.data.viewmodel.IngredientViewModel
 import com.groupe.gestionrecettes.ui.screens.*
@@ -41,11 +43,25 @@ fun MainNavigationContent(navController: NavHostController = rememberNavControll
             composable(Screens.Pantry.route) { PantryScreen(navController, ingredientViewModel) }
             composable(Screens.Profile.route) { ProfileScreen(navController) }
             composable(Screens.Login.route) { LoginScreen(navController) }
-            composable(Screens.RecipeDetails.route) { backStackEntry ->
-                val recipeId = backStackEntry.arguments?.getString("recipeId")?.toIntOrNull()
-                if (recipeId != null) {
-                    RecipeDetailsScreen(navController, recipeId, recipeViewModel = hiltViewModel())
-                }
+            composable(
+                route = Screens.RecipeDetails.route,
+                arguments = listOf(
+                    navArgument("recipeId") { type = NavType.IntType },
+                    navArgument("userId") {
+                        type = NavType.StringType // Use StringType to handle nulls
+                        nullable = true
+                        defaultValue = null
+                    }
+                )
+            ) { backStackEntry ->
+                val recipeId = backStackEntry.arguments?.getInt("recipeId") ?: return@composable
+                val userIdString = backStackEntry.arguments?.getString("userId")
+                val userId = userIdString?.toIntOrNull() // Convert String to Int or null
+                RecipeDetailsScreen(
+                    navController = navController,
+                    recipeId = recipeId,
+                    userId = userId
+                )
             }
             composable(Screens.RecipeStep.route) { backStackEntry ->
                 val recipeId = backStackEntry.arguments?.getString("recipeId")?.toIntOrNull()

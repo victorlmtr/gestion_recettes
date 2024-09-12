@@ -16,5 +16,6 @@ data class Recipe(
     val idTypeRecette: RecipeType,
     val regimeRecettes: List<RecipeDiet>,
     val etapes: List<Step>,
-    val totalTime: String
+    val totalTime: String,
+    val comments: List<Comment>
 )

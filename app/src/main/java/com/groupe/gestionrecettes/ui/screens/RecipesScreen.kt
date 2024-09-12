@@ -18,11 +18,13 @@ import com.groupe.gestionrecettes.ui.theme.ScrontchTheme
 import com.groupe.gestionrecettes.data.viewmodel.RecipeViewModel
 import androidx.compose.material3.*
 import androidx.compose.ui.tooling.preview.Preview
+import com.groupe.gestionrecettes.data.viewmodel.AuthViewModel
 
 
 @Composable
 fun RecipesScreen(
     navController: NavController,
+    authViewModel: AuthViewModel = hiltViewModel(),
     recipeViewModel: RecipeViewModel = hiltViewModel()
 ) {
     var isTomatoChipSelected by remember { mutableStateOf(false) }
@@ -34,6 +36,9 @@ fun RecipesScreen(
     val recipes by recipeViewModel.recipes.collectAsState()
     val loading by recipeViewModel.loading.collectAsState()
     val error by recipeViewModel.error.collectAsState()
+    val userDetails by authViewModel.userDetails.collectAsState()
+    val isLoggedIn = userDetails != null
+    val userId = userDetails?.id
 
     Column(
         modifier = Modifier
@@ -93,7 +98,7 @@ fun RecipesScreen(
                         RecipeSmallCardClickable(
                             recipe = recipe,
                             onClick = {
-                                navController.navigate(Screens.RecipeDetails.createRoute(recipe.id))
+                                navController.navigate(Screens.RecipeDetails.createRoute(recipe.id, userId))
                             }
                         )
                         Spacer(modifier = Modifier.height(16.dp)) // Adjust spacing between cards as needed
