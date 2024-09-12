@@ -1,8 +1,10 @@
 package com.groupe.gestionrecettes.data.model
 
+import java.util.Date
+
 data class Comment(
-    val idUtilisateur: String,
-    val starRating: Float,
-    val comment: String?,
-    val date: String
+    val idUtilisateur: UserDto,
+    val noteAvis: Double,
+    val commentaireAvis: String?,
+    val dateCommentaire: Date,
 )
